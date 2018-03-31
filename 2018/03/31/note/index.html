@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Note1Posted on 2018-02-06It’s really cold here ヾ(｡ꏿ﹏ꏿ)ﾉﾞjs是弱类型语言。声明变量不需要规定类型，赋值没有类型检查，还有隐式类型转换包容。来总结下涉及到类型转换的部分方法 typeof输出变量存的值类型，输出结果都是字符串类型。123456789101112131415161718typeof 10// &quot;number&quot;typeof &apos;fis">
+<meta name="keywords" content="misfortune follows super luck">
+<meta property="og:type" content="article">
+<meta property="og:title" content="note">
+<meta property="og:url" content="http://Fatty-Fish.github.io/2018/03/31/note/index.html">
+<meta property="og:site_name" content="Fatty-Fish">
+<meta property="og:description" content="Note1Posted on 2018-02-06It’s really cold here ヾ(｡ꏿ﹏ꏿ)ﾉﾞjs是弱类型语言。声明变量不需要规定类型，赋值没有类型检查，还有隐式类型转换包容。来总结下涉及到类型转换的部分方法 typeof输出变量存的值类型，输出结果都是字符串类型。123456789101112131415161718typeof 10// &quot;number&quot;typeof &apos;fis">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-31T09:17:10.774Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="note">
+<meta name="twitter:description" content="Note1Posted on 2018-02-06It’s really cold here ヾ(｡ꏿ﹏ꏿ)ﾉﾞjs是弱类型语言。声明变量不需要规定类型，赋值没有类型检查，还有隐式类型转换包容。来总结下涉及到类型转换的部分方法 typeof输出变量存的值类型，输出结果都是字符串类型。123456789101112131415161718typeof 10// &quot;number&quot;typeof &apos;fis">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Fatty-Fish.github.io/2018/03/31/note/"/>
+
+
+
+
+
+  <title>note | Fatty-Fish</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fatty-Fish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">qjfish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">note</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T17:12:00+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Note1"><a href="#Note1" class="headerlink" title="Note1"></a>Note1</h3><p>Posted on 2018-02-06<br>It’s really cold here ヾ(｡ꏿ﹏ꏿ)ﾉﾞ<br>js是弱类型语言。声明变量不需要规定类型，赋值没有类型检查，还有隐式类型转换包容。<br>来总结下涉及到类型转换的部分方法</p>
+<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><p>输出变量存的值类型，输出结果都是字符串类型。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">typeof 10</span><br><span class="line">// <span class="string">"number"</span></span><br><span class="line">typeof <span class="string">'fish'</span></span><br><span class="line">// <span class="string">"string"</span></span><br><span class="line">typeof <span class="literal">false</span></span><br><span class="line">// <span class="string">"boolean"</span></span><br><span class="line">typeof null</span><br><span class="line">// <span class="string">"object"</span></span><br><span class="line">typeof undefined</span><br><span class="line">// <span class="string">"undefined"</span></span><br><span class="line">typeof <span class="function"><span class="title">function</span></span> ()&#123;&#125;</span><br><span class="line">// <span class="string">"function"</span></span><br><span class="line">typeof &#123;&#125;</span><br><span class="line">// <span class="string">"object"</span></span><br><span class="line">typeof []</span><br><span class="line">// <span class="string">"object"</span></span><br><span class="line">typeof NaN </span><br><span class="line">// <span class="string">"number"</span></span><br></pre></td></tr></table></figure></p>
+<p>这个NaN是Number转换失败的结果，虽然Not a Number，但还是归为Number。<br>JavaScript中值是一个表示值类型的标签和实际值数据一起表示。0标签表示对象，而null空，标签也是0，所以typeof时会返回“object”。<br>[]和{}的判断也是不准确的，可以借助以下Object.prototype.toString.call()或者用Array.isArray()返回的布尔值判断是否为数组。</p>
+<h4 id="toString（）"><a href="#toString（）" class="headerlink" title="toString（）"></a>toString（）</h4><p>这是定义在Object.prototype上的方法，所有对象都能使用。Number，String，Array和Boolean都对此方法重写了，Undefined和null不能调用toString。</p>
+<p>Number返回为字符串：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">console.log(a.toString()) // <span class="string">"10"</span></span><br><span class="line">console.log(a.toString(2)) // <span class="string">"1010"</span> 把a转换为二进制并返回字符串。</span><br></pre></td></tr></table></figure></p>
+<p>String返回为字符串：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = <span class="string">"fatty-fish"</span>;</span><br><span class="line">console.log(a.toString()) // <span class="string">"fatty-fish"</span></span><br></pre></td></tr></table></figure></p>
+<p>Array输出每个元素：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = [<span class="string">"fish"</span>, 10];</span><br><span class="line">console.log(a.toString()) // <span class="string">"fish,10"</span></span><br></pre></td></tr></table></figure></p>
+<p>Boolean返回字符串：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = isNaN(10); // <span class="literal">false</span></span><br><span class="line">console.log(a.toString()) // <span class="string">"false"</span></span><br></pre></td></tr></table></figure></p>
+<p>Object调用返回”[object 值类型]”<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call([])</span><br><span class="line">// <span class="string">"[object Array]"</span></span><br><span class="line">Object.prototype.toString.call(&#123;&#125;)</span><br><span class="line">// <span class="string">"[object Object]"</span></span><br><span class="line">Object.prototype.toString.call(10)</span><br><span class="line">// <span class="string">"[object Number]"</span></span><br><span class="line">Object.prototype.toString.call(<span class="string">"fish"</span>)</span><br><span class="line">// <span class="string">"[object String]"</span></span><br><span class="line">Object.prototype.toString.call(null)</span><br><span class="line">// <span class="string">"[object Null]"</span></span><br><span class="line">Object.prototype.toString.call(undefined)</span><br><span class="line">// <span class="string">"[object Undefined]"</span></span><br><span class="line">Object.prototype.toString.call(<span class="function"><span class="title">function</span></span> () &#123;&#125;)</span><br><span class="line">// <span class="string">"[object Function]"</span></span><br><span class="line">Object.prototype.toString.call(<span class="literal">false</span>)</span><br><span class="line">// <span class="string">"[object Boolean]"</span></span><br><span class="line"></span><br><span class="line">Object.prototype.toString.call(Number)</span><br><span class="line">// <span class="string">"[object Function]"</span></span><br><span class="line">Object.prototype.toString.call(Boolean)</span><br><span class="line">// <span class="string">"[object Function]"</span></span><br></pre></td></tr></table></figure></p>
+<p>所以Object.prototype.toString()方法是非常准确地！只是对他重写了的类型调用时要call一下ヽ(￣▽￣)ノ</p>
+<h4 id="Number（）"><a href="#Number（）" class="headerlink" title="Number（）"></a>Number（）</h4><p>会将传入的值尽量转换为Number：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Number(<span class="string">"fish"</span>)</span><br><span class="line">// NaN</span><br><span class="line">Number(<span class="string">"11"</span>)</span><br><span class="line">// 11</span><br><span class="line">Number(<span class="string">"11a"</span>)</span><br><span class="line">// NaN</span><br><span class="line">Number(undefined)</span><br><span class="line">// NaN</span><br><span class="line">Number([1,1])</span><br><span class="line">// NaN</span><br><span class="line">Number(&#123;&#125;)</span><br><span class="line">// NaN</span><br><span class="line">Number(NaN)</span><br><span class="line">// NaN</span><br><span class="line">Number(<span class="string">''</span>)</span><br><span class="line">// 0</span><br><span class="line">Number(<span class="literal">false</span>)</span><br><span class="line">// 0</span><br><span class="line">Number(null)</span><br><span class="line">// 0</span><br><span class="line">Number([])</span><br><span class="line">// 0</span><br><span class="line">Number([1])</span><br><span class="line">// 1</span><br><span class="line">Number(<span class="literal">true</span>)</span><br><span class="line">// 1</span><br></pre></td></tr></table></figure></p>
+<p>其他Boolean, String等也是尽量强行转为自己人。</p>
+<h4 id="isNaN（）"><a href="#isNaN（）" class="headerlink" title="isNaN（）"></a>isNaN（）</h4><p>sth is not a number 返回布尔值。<br>在判断是否 不为数字前，会先Number一下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">isNaN(<span class="string">"111"</span>) // <span class="string">"111"</span>会Number(<span class="string">"111"</span>) 变为 数字 111后，被isNaN()判断。</span><br><span class="line">// <span class="literal">false</span></span><br><span class="line">isNaN(<span class="string">"red"</span>)</span><br><span class="line">// <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="parseInt（）"><a href="#parseInt（）" class="headerlink" title="parseInt（）"></a>parseInt（）</h4><p>尽量将传入的值转为整型：数字小数点后全舍去。字符串从左往右数到第一位非数字停止。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">parseInt(2.2)</span><br><span class="line">// 2</span><br><span class="line">parseInt(10.9)</span><br><span class="line">// 10</span><br><span class="line">parseInt(<span class="string">'10'</span>)</span><br><span class="line">// 10</span><br><span class="line">parseInt(<span class="string">'22a11a'</span>)</span><br><span class="line">// 22</span><br><span class="line">parseInt(1000, 2) // 将1000 看成二进制，再输出对应十进制，2-36进制。</span><br><span class="line">// 8</span><br></pre></td></tr></table></figure></p>
+<h4 id="parseFloat（）"><a href="#parseFloat（）" class="headerlink" title="parseFloat（）"></a>parseFloat（）</h4><p>尽量字符串转为十进制数字，且是浮点型数字：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">parseFloat(<span class="string">"11.11"</span>)</span><br><span class="line">// 11.11</span><br><span class="line">parseFloat(11.11)</span><br><span class="line">// 11.11</span><br><span class="line">parseFloat(<span class="literal">false</span>)</span><br><span class="line">// NaN</span><br><span class="line">parseFloat(<span class="string">"11a"</span>)</span><br><span class="line">// 11</span><br><span class="line">parseFloat(<span class="string">"11.w1"</span>)</span><br><span class="line">// 11</span><br></pre></td></tr></table></figure></p>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>会发生隐式类型转换：<br>加法+ 双目运算符，要两边都为number才会是Number。不然会链接成字符串。</p>
+<p>-true ~ -1<br>+undefined ~ NaN<br>“10” &lt; 20 ~ true<br>undefined == null ~ true<br>…and so on!</p>
+<p>严格等于<br>全等：“===” 和 不全等：“!==” 不发生类型转换。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/31/继承/" rel="next" title="继承">
+                <i class="fa fa-chevron-left"></i> 继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/31/note1/" rel="prev" title="note1">
+                note1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="qj" />
+          <p class="site-author-name" itemprop="name">qj</p>
+           
+              <p class="site-description motion-element" itemprop="description">marking my previous blogs</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Note1"><span class="nav-number">1.</span> <span class="nav-text">Note1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof"><span class="nav-number">1.1.</span> <span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#toString（）"><span class="nav-number">1.2.</span> <span class="nav-text">toString（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Number（）"><span class="nav-number">1.3.</span> <span class="nav-text">Number（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isNaN（）"><span class="nav-number">1.4.</span> <span class="nav-text">isNaN（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parseInt（）"><span class="nav-number">1.5.</span> <span class="nav-text">parseInt（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parseFloat（）"><span class="nav-number">1.6.</span> <span class="nav-text">parseFloat（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算符"><span class="nav-number">1.7.</span> <span class="nav-text">运算符</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qj</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

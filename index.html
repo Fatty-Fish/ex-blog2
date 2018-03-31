@@ -264,6 +264,701 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/note1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/note1/" itemprop="url">note1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T17:17:36+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Note2"><a href="#Note2" class="headerlink" title="Note2"></a>Note2</h3><p> Posted on 2018-02-06<br>The very essence of romance is uncertainty!</p>
+<h4 id="this指向"><a href="#this指向" class="headerlink" title="this指向"></a>this指向</h4><p>call()可以改变this指向：它可以接受很多参数，第一个参数是调用它的函数的this新指向的对象，其余都是调用它的函数的接受的参数。<br>apply()和call()效果一样，区别在于apply只有两个参数，它的第二个参数是一个数组，数组里面是调用它的函数的接受的参数，相当于arguments。</p>
+<p>bind()同样改变this指向，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var fish = <span class="function"><span class="title">function</span></span> () &#123;&#125;;</span><br><span class="line">fish.bind(&#123;···&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>如此，在任何地方，fish函数的this指向都是这个{···}</p>
+<h4 id="for-in"><a href="#for-in" class="headerlink" title="for in"></a>for in</h4><p>数组可以通过for循环，forEach来遍历元素，对象可以用for in枚举：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fish = &#123;</span><br><span class="line">    color:<span class="string">"red"</span>,</span><br><span class="line">    fat: 500</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (prop <span class="keyword">in</span> fish) &#123;</span><br><span class="line">    console.log(prop, fish[prop])</span><br><span class="line">&#125;</span><br><span class="line">// 输出：<span class="string">"color"</span> <span class="string">"red"</span> <span class="string">"fat"</span> 500</span><br></pre></td></tr></table></figure></p>
+<p>但 for in 能输出除了Object.prototype上的属性外，所有原型链上以及对象（fish）自身的所有属性！那问题来了，如果只想要查看自身属性呢？有一个在对象上的方法：Object.prototype.hasOwnProperty(),接受一个属性字符串作为参数。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fish = &#123;</span><br><span class="line">        color: <span class="string">"red"</span>,</span><br><span class="line">        fat: 500</span><br><span class="line">    &#125;</span><br><span class="line">console.log(fish.hasOwnProperty(<span class="string">"color"</span>)); // <span class="literal">true</span></span><br><span class="line">console.log(Object.prototype.hasOwnProperty.call(fish, <span class="string">"color"</span>)); // <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="in"><a href="#in" class="headerlink" title="in"></a>in</h4><p>可以判断字符串是否为对象的一个属性：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fish = &#123;</span><br><span class="line">        color: <span class="string">"red"</span>,</span><br><span class="line">        fat: 500</span><br><span class="line">    &#125;</span><br><span class="line">console.log(<span class="string">"red"</span> <span class="keyword">in</span> fish); // <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><p>可以判断对象是否是这个构造函数构造而来，或者说对象的原型链上有无构造函数的原型。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fish = &#123;</span><br><span class="line">        color: <span class="string">"red"</span>,</span><br><span class="line">        fat: 500</span><br><span class="line">    &#125;;</span><br><span class="line">console.log(fish instanceof Object); // <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>总结：判断是对象或者是数组的方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 第一种：</span><br><span class="line"><span class="keyword">if</span>(O instanceof Array) &#123;</span><br><span class="line">    // <span class="string">"array"</span>;</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    // <span class="string">"object"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>是Array来过滤而不是Object,若是Object会无法过滤。数组的原型链上也有Object,在我理解，数组是个特殊的常用的对象。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 第二种：</span><br><span class="line"><span class="keyword">if</span> (O.constructor == Array) &#123;</span><br><span class="line">    // <span class="string">"array"</span> </span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    // <span class="string">"object"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>BUT 这两种方法都只能在同一网页下才能判断，若果是iframe标签或者其他方式嵌套了网页，则通融不了。可以用强大的Object.prototype.toString然后call一下。看返回的是”[object Array]”还是”[object Object]”.</p>
+<h4 id="逗号运算符"><a href="#逗号运算符" class="headerlink" title="逗号运算符"></a>逗号运算符</h4><p>将类参数列表的值返回最后一个值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr = (1,2,3,4,5) // arr = 5</span><br><span class="line">var f = (<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">"there is a fish"</span>&#125;,<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">"it's a fake fish"</span>&#125;)();</span><br><span class="line">// f = <span class="string">"it's a fake fish"</span> 执行了。</span><br></pre></td></tr></table></figure></p>
+<h4 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h4><p>代替if else<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (fish &gt;= 1000) &#123;</span><br><span class="line">    console.log(<span class="string">"好多鱼"</span>)</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    console.log(<span class="string">"有鱼"</span>)</span><br><span class="line">&#125;</span><br><span class="line">// 等价于</span><br><span class="line">fish &gt;= 1000 ? console.log(<span class="string">"好多鱼"</span>):console.log(<span class="string">"有鱼"</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="arguments-callee"><a href="#arguments-callee" class="headerlink" title="arguments.callee"></a>arguments.callee</h4><p>记录执行时函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">fish</span></span> () &#123;</span><br><span class="line">    conosle.log(arguments.callee)</span><br><span class="line">&#125;</span><br><span class="line">// 整个fish函数。</span><br></pre></td></tr></table></figure></p>
+<h4 id="caller"><a href="#caller" class="headerlink" title="caller"></a>caller</h4><p>输出函数执行时函数环境。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">outerFish</span></span> () &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">innerFish</span></span> () &#123;</span><br><span class="line">        console.log(innerFish.caller) // 整个outerFish</span><br><span class="line">    &#125;;</span><br><span class="line">    innerFish();</span><br><span class="line">    console.log(outerFish.caller); // 外部没有函数环境，为null。</span><br><span class="line">&#125;</span><br><span class="line">outerFish();</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/note/" itemprop="url">note</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T17:12:00+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Note1"><a href="#Note1" class="headerlink" title="Note1"></a>Note1</h3><p>Posted on 2018-02-06<br>It’s really cold here ヾ(｡ꏿ﹏ꏿ)ﾉﾞ<br>js是弱类型语言。声明变量不需要规定类型，赋值没有类型检查，还有隐式类型转换包容。<br>来总结下涉及到类型转换的部分方法</p>
+<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><p>输出变量存的值类型，输出结果都是字符串类型。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">typeof 10</span><br><span class="line">// <span class="string">"number"</span></span><br><span class="line">typeof <span class="string">'fish'</span></span><br><span class="line">// <span class="string">"string"</span></span><br><span class="line">typeof <span class="literal">false</span></span><br><span class="line">// <span class="string">"boolean"</span></span><br><span class="line">typeof null</span><br><span class="line">// <span class="string">"object"</span></span><br><span class="line">typeof undefined</span><br><span class="line">// <span class="string">"undefined"</span></span><br><span class="line">typeof <span class="function"><span class="title">function</span></span> ()&#123;&#125;</span><br><span class="line">// <span class="string">"function"</span></span><br><span class="line">typeof &#123;&#125;</span><br><span class="line">// <span class="string">"object"</span></span><br><span class="line">typeof []</span><br><span class="line">// <span class="string">"object"</span></span><br><span class="line">typeof NaN </span><br><span class="line">// <span class="string">"number"</span></span><br></pre></td></tr></table></figure></p>
+<p>这个NaN是Number转换失败的结果，虽然Not a Number，但还是归为Number。<br>JavaScript中值是一个表示值类型的标签和实际值数据一起表示。0标签表示对象，而null空，标签也是0，所以typeof时会返回“object”。<br>[]和{}的判断也是不准确的，可以借助以下Object.prototype.toString.call()或者用Array.isArray()返回的布尔值判断是否为数组。</p>
+<h4 id="toString（）"><a href="#toString（）" class="headerlink" title="toString（）"></a>toString（）</h4><p>这是定义在Object.prototype上的方法，所有对象都能使用。Number，String，Array和Boolean都对此方法重写了，Undefined和null不能调用toString。</p>
+<p>Number返回为字符串：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">console.log(a.toString()) // <span class="string">"10"</span></span><br><span class="line">console.log(a.toString(2)) // <span class="string">"1010"</span> 把a转换为二进制并返回字符串。</span><br></pre></td></tr></table></figure></p>
+<p>String返回为字符串：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = <span class="string">"fatty-fish"</span>;</span><br><span class="line">console.log(a.toString()) // <span class="string">"fatty-fish"</span></span><br></pre></td></tr></table></figure></p>
+<p>Array输出每个元素：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = [<span class="string">"fish"</span>, 10];</span><br><span class="line">console.log(a.toString()) // <span class="string">"fish,10"</span></span><br></pre></td></tr></table></figure></p>
+<p>Boolean返回字符串：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = isNaN(10); // <span class="literal">false</span></span><br><span class="line">console.log(a.toString()) // <span class="string">"false"</span></span><br></pre></td></tr></table></figure></p>
+<p>Object调用返回”[object 值类型]”<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call([])</span><br><span class="line">// <span class="string">"[object Array]"</span></span><br><span class="line">Object.prototype.toString.call(&#123;&#125;)</span><br><span class="line">// <span class="string">"[object Object]"</span></span><br><span class="line">Object.prototype.toString.call(10)</span><br><span class="line">// <span class="string">"[object Number]"</span></span><br><span class="line">Object.prototype.toString.call(<span class="string">"fish"</span>)</span><br><span class="line">// <span class="string">"[object String]"</span></span><br><span class="line">Object.prototype.toString.call(null)</span><br><span class="line">// <span class="string">"[object Null]"</span></span><br><span class="line">Object.prototype.toString.call(undefined)</span><br><span class="line">// <span class="string">"[object Undefined]"</span></span><br><span class="line">Object.prototype.toString.call(<span class="function"><span class="title">function</span></span> () &#123;&#125;)</span><br><span class="line">// <span class="string">"[object Function]"</span></span><br><span class="line">Object.prototype.toString.call(<span class="literal">false</span>)</span><br><span class="line">// <span class="string">"[object Boolean]"</span></span><br><span class="line"></span><br><span class="line">Object.prototype.toString.call(Number)</span><br><span class="line">// <span class="string">"[object Function]"</span></span><br><span class="line">Object.prototype.toString.call(Boolean)</span><br><span class="line">// <span class="string">"[object Function]"</span></span><br></pre></td></tr></table></figure></p>
+<p>所以Object.prototype.toString()方法是非常准确地！只是对他重写了的类型调用时要call一下ヽ(￣▽￣)ノ</p>
+<h4 id="Number（）"><a href="#Number（）" class="headerlink" title="Number（）"></a>Number（）</h4><p>会将传入的值尽量转换为Number：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Number(<span class="string">"fish"</span>)</span><br><span class="line">// NaN</span><br><span class="line">Number(<span class="string">"11"</span>)</span><br><span class="line">// 11</span><br><span class="line">Number(<span class="string">"11a"</span>)</span><br><span class="line">// NaN</span><br><span class="line">Number(undefined)</span><br><span class="line">// NaN</span><br><span class="line">Number([1,1])</span><br><span class="line">// NaN</span><br><span class="line">Number(&#123;&#125;)</span><br><span class="line">// NaN</span><br><span class="line">Number(NaN)</span><br><span class="line">// NaN</span><br><span class="line">Number(<span class="string">''</span>)</span><br><span class="line">// 0</span><br><span class="line">Number(<span class="literal">false</span>)</span><br><span class="line">// 0</span><br><span class="line">Number(null)</span><br><span class="line">// 0</span><br><span class="line">Number([])</span><br><span class="line">// 0</span><br><span class="line">Number([1])</span><br><span class="line">// 1</span><br><span class="line">Number(<span class="literal">true</span>)</span><br><span class="line">// 1</span><br></pre></td></tr></table></figure></p>
+<p>其他Boolean, String等也是尽量强行转为自己人。</p>
+<h4 id="isNaN（）"><a href="#isNaN（）" class="headerlink" title="isNaN（）"></a>isNaN（）</h4><p>sth is not a number 返回布尔值。<br>在判断是否 不为数字前，会先Number一下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">isNaN(<span class="string">"111"</span>) // <span class="string">"111"</span>会Number(<span class="string">"111"</span>) 变为 数字 111后，被isNaN()判断。</span><br><span class="line">// <span class="literal">false</span></span><br><span class="line">isNaN(<span class="string">"red"</span>)</span><br><span class="line">// <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="parseInt（）"><a href="#parseInt（）" class="headerlink" title="parseInt（）"></a>parseInt（）</h4><p>尽量将传入的值转为整型：数字小数点后全舍去。字符串从左往右数到第一位非数字停止。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">parseInt(2.2)</span><br><span class="line">// 2</span><br><span class="line">parseInt(10.9)</span><br><span class="line">// 10</span><br><span class="line">parseInt(<span class="string">'10'</span>)</span><br><span class="line">// 10</span><br><span class="line">parseInt(<span class="string">'22a11a'</span>)</span><br><span class="line">// 22</span><br><span class="line">parseInt(1000, 2) // 将1000 看成二进制，再输出对应十进制，2-36进制。</span><br><span class="line">// 8</span><br></pre></td></tr></table></figure></p>
+<h4 id="parseFloat（）"><a href="#parseFloat（）" class="headerlink" title="parseFloat（）"></a>parseFloat（）</h4><p>尽量字符串转为十进制数字，且是浮点型数字：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">parseFloat(<span class="string">"11.11"</span>)</span><br><span class="line">// 11.11</span><br><span class="line">parseFloat(11.11)</span><br><span class="line">// 11.11</span><br><span class="line">parseFloat(<span class="literal">false</span>)</span><br><span class="line">// NaN</span><br><span class="line">parseFloat(<span class="string">"11a"</span>)</span><br><span class="line">// 11</span><br><span class="line">parseFloat(<span class="string">"11.w1"</span>)</span><br><span class="line">// 11</span><br></pre></td></tr></table></figure></p>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>会发生隐式类型转换：<br>加法+ 双目运算符，要两边都为number才会是Number。不然会链接成字符串。</p>
+<p>-true ~ -1<br>+undefined ~ NaN<br>“10” &lt; 20 ~ true<br>undefined == null ~ true<br>…and so on!</p>
+<p>严格等于<br>全等：“===” 和 不全等：“!==” 不发生类型转换。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/继承/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/继承/" itemprop="url">继承</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T17:04:04+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Inherits"><a href="#Inherits" class="headerlink" title="Inherits"></a>Inherits</h3><p>Posted on 2018-02-04<br>在JS语法中，继承也就是想要共用一些属性，减少代码重复。实现继承只有把想要公用的属性写在原型上，再通过原型链获取。如果想要两个构造函数的实例继承一方的原型上的属性，而且两个构造函数的实例相互独立，自由发展，就需要讨论啦！最好的方法是圣杯式继承。<br>圣杯不是耶稣与他十一个门徒喝的葡萄酒杯子，也不是加勒比海盗里盛人鱼眼泪的圣杯。PS：传说喝下里面的水会返老还童，死而复生并获得永生！但是在这里借用它的意义：永生。</p>
+<p>首先先看看别的继承方式为什么不用？</p>
+<h4 id="一-传统继承"><a href="#一-传统继承" class="headerlink" title="一.传统继承"></a>一.传统继承</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">OldFish.prototype = &#123;</span><br><span class="line">    color: <span class="string">"red"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">OldFish</span></span> () &#123;</span><br><span class="line">    this.fat = 500;</span><br><span class="line">&#125;;</span><br><span class="line">var OOldFish = new OldFish();</span><br><span class="line">YoungFish.prototype = OOldFish; //让target函数的原型指向origin函数的实例。</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">YoungFish</span></span> () &#123;</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.hobbies = &#123;</span><br><span class="line">        dance: <span class="string">"well"</span>;</span><br><span class="line">        food: <span class="string">"spicy"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var OYoungFish = new YoungFish();</span><br></pre></td></tr></table></figure>
+<p>这种让target函数的原型指向origin函数的实例，来实现继承origin函数的原型上的属性方法的，是有缺陷的：YoungFish会继承老鱼的一身肥肉 this.fat = 500 啊啊,我们只想要单纯的YoungFish继承OldFish.prototype所指向的对象。</p>
+<h4 id="二-构造函数继承"><a href="#二-构造函数继承" class="headerlink" title="二.构造函数继承"></a>二.构造函数继承</h4><p>这个有点像 es6 中 class 类之间的继承：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class OldFish &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span> () &#123;</span><br><span class="line">        // var this = &#123;&#125;</span><br><span class="line">        this.fat = 500;</span><br><span class="line">        // <span class="built_in">return</span> this</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">class YoungFish extends OldFish &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span> () &#123;</span><br><span class="line">        super(); // 接收OldFish里constructor里返回的this对象。</span><br><span class="line">        this.sex = <span class="string">"female"</span>;</span><br><span class="line">        this.hobbies = &#123;</span><br><span class="line">            dance: <span class="string">"well"</span>;</span><br><span class="line">            food: <span class="string">"spicy"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过super(), 以上YoungFish就继承了OldFish实例的所有属性方法等。<br>而原生的可以用call()方法实现：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">OldFish.prototype = &#123;</span><br><span class="line">    color: <span class="string">"red"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">OldFish</span></span> () &#123;</span><br><span class="line">    // var this = Object.create(OldFish.prototype); </span><br><span class="line">    this.fat = 500;</span><br><span class="line">    // <span class="built_in">return</span> this</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">YoungFish</span></span> () &#123;</span><br><span class="line">    OldFish.call(this);</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.hobbies = &#123;</span><br><span class="line">        dance: <span class="string">"well"</span>;</span><br><span class="line">        food: <span class="string">"spicy"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>以上通过OldFish调用call方法把YoungFish的this传进去，继承的只是实例属性，不能继承老鱼原型上的属性。不符合我们想法。而且每次new YoungFish() 都会执行OldFish.call(this)，这相当于又new OldFish(),不是我们想要的。</p>
+<h4 id="三-共享原型"><a href="#三-共享原型" class="headerlink" title="三.共享原型"></a>三.共享原型</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">OldFish.prototype = &#123;</span><br><span class="line">    color: <span class="string">"red"</span>,</span><br><span class="line">    friends: &#123;</span><br><span class="line">        shrimp: 2000,</span><br><span class="line">        octopus: 30,</span><br><span class="line">        other: 10000</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">OldFish</span></span> () &#123;</span><br><span class="line">    // var this = Object.create(OldFish.prototype); </span><br><span class="line">    this.fat = 500;</span><br><span class="line">    // <span class="built_in">return</span> this</span><br><span class="line">&#125;;</span><br><span class="line">YoungFish.prototype = OldFish.prototype; // 简单粗暴的继承！</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">YoungFish</span></span> () &#123;</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.hobbies = &#123;</span><br><span class="line">        dance: <span class="string">"well"</span>;</span><br><span class="line">        food: <span class="string">"spicy"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这个共享原型的方法可以说简单粗暴，直接共同指向！如果后期操作了YoungFish的原型，那完犊子，OldFish也变了原型。影响太大不好。</p>
+<h4 id="四-圣杯式继承"><a href="#四-圣杯式继承" class="headerlink" title="四. 圣杯式继承"></a>四. 圣杯式继承</h4><p>添加一个中介者。写一个继承函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> inherit (target, origin) &#123;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">MiddleFish</span></span> () &#123;&#125;; // 造一个空的中介函数</span><br><span class="line">var oMiddleFish = new MiddleFish(); // 产生一个中介函数实例</span><br><span class="line">MiddleFish.prototype = origin.prtotype; // !! 1</span><br><span class="line">target.prototype = oMiddleFish; // !! 2</span><br><span class="line">target.prototype.constructor = target; // !! 3</span><br><span class="line">target.prototype.uber = origin; // !! 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上inherit函数就近乎完美。妙在制造了一个MiddleFish, 其中!! 1和2非常关键，1保证了target能够通过MiddleFish继承origin的prototype上的属性，2保证了target操作自己原型时不影响origin的原型。 因为target操作自己原型，是在MiddleFish的实例上操作，离原型差得远呢。3也很关键，如果没有纠正这一步，target找自己的constructor时，会因为自己的prototype指向“target.prototype = oMiddleFish; // !! 2”找到oMiddleFish, 又因为“MiddleFish.prototype = origin.prtotype; // !! 1”最终找到origin.prototype上的constructor是origin本身。。这不是我们想要的，3会纠正这个走向。4也是必须的，它让target知道自己的上一级是origin。<br>这只是近乎完美，我们想要达到非常完美还得改改：上面的缺陷是每次使用inherit函数，都会请求一片空间，储存一个空函数。这是非常耗费性能的。所以可以形成闭包，重复利用这个空函数。我们可以这样玩：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var inherit = (<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    var MiddleFish = <span class="function"><span class="title">function</span></span> () &#123;&#125;;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span> (target, origin) &#123;</span><br><span class="line">        MiddleFish.prototype = origin.prototype;</span><br><span class="line">        var oMiddleFish = new MiddleFish();</span><br><span class="line">        target.prototype = oMiddleFish;</span><br><span class="line">        target.prototype.constructor = target;</span><br><span class="line">        target.prototype.uber = origin;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>如此便可以复用“var MiddleFish = function () {}”这段代码，perfect</p>
+<p>最初会有这种忧虑：作用域链没有被释放，那下一次使用inherit函数时，会不会因为“MiddleFish.prototype = origin.prototype;”把上一个的原型也给改了？？答案：当然不会啦！是引用值啊。因为上一次target.prototype指向oMiddleFish，而oMiddleFish通过–proto–指向MiddleFish.prototype = origin.prototype这个引用值对象。当下一次再来使用inherit函数时，MiddleFish.prototype更改指向，这并不会影响上一次–proto–的指向。而且每个MiddleFish实例都是在MiddleFish.prototype更改指向后创立。所以每个实例自身不一样都是新鲜实例，而且每个实例–proto–所指向的对象也都是正确的origin.prototype所指向的对象。</p>
+<p>吃饭！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/构造函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/构造函数/" itemprop="url">构造函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T16:56:06+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="一-创建对象"><a href="#一-创建对象" class="headerlink" title="一.创建对象"></a>一.创建对象</h4><p>创建对象可以分为三种方法：</p>
+<ol>
+<li>对象字面量（对象直接量）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var fish = &#123;</span><br><span class="line">    name: <span class="string">"fatty-fish"</span>,</span><br><span class="line">    sex: <span class="string">"who knows"</span>,</span><br><span class="line">    size: 200,</span><br><span class="line">    hobby:<span class="string">"bubble"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>系统自带构造函数</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var fish = new Object(); // &#123;&#125;</span><br><span class="line">var arrFish = new Array(); // []</span><br><span class="line">var dateFish = new Date(); // &#123;&#125;</span><br><span class="line">var numFish = new Number(); // &#123;&#125;</span><br><span class="line">var strFish = new String(); // &#123;&#125;</span><br><span class="line">var bleanFish = new Boolean(); // &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>以上，五个为系统自带构造函数，都能创建对象，数组是对象，函数是对象，废话。<br>new Number(), new String(), new Boolean()是通过包装类创建的对象，是将原始值（PrimitiveValue）包裹为一个对象。一般是JS为了容错，私下包裹：错误地访问原始值String的长度、为原始值添加属性等等…</p>
+<ol start="3">
+<li>自定义构造函数<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">MakeFish</span></span> () &#123;</span><br><span class="line">    this.name = <span class="string">"slim-fish"</span>;</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.size =  100;</span><br><span class="line">    this.hobby = <span class="string">"bubble too"</span>;</span><br><span class="line">&#125;</span><br><span class="line">var fish = new MakeFish();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>像这样，我们就自己构造出一条理想的鱼。</p>
+<p>所以，在JS中，Object, Array, function, Date等内部函数都可以创建对象。以及原始值Boolean, String, Number也能被包装成对象。当然撇开undefined和null。</p>
+<h4 id="二-自定义构造函数"><a href="#二-自定义构造函数" class="headerlink" title="二.自定义构造函数"></a>二.自定义构造函数</h4><p>那么自定义构造函数是怎样运行的嘞？<br>借用刚才那条理想的鱼，每次创建新对象时，内部是这样做的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">MakeFish</span></span> () &#123;</span><br><span class="line">    // var this = &#123;&#125;;</span><br><span class="line">    this.name = <span class="string">"slim-fish"</span>;</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.size =  100;</span><br><span class="line">    this.hobby = <span class="string">"bubble too"</span>;</span><br><span class="line">    // <span class="built_in">return</span> this;</span><br><span class="line">&#125;</span><br><span class="line">var fish = new MakeFish();</span><br></pre></td></tr></table></figure></p>
+<p>所以，我们得到的fish其实是return出来的 this 对象。每次new MakeFish()都会这样流程一遍。所以每条鱼是相互独立的。操作每一条鱼，都是在操作不同的this指代的那个对象。</p>
+<p>有这样一道题：结合预编译<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var a = 5;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">test</span></span> () &#123;</span><br><span class="line">    a = 0;</span><br><span class="line">    alert(a);</span><br><span class="line">    alert(this.a);</span><br><span class="line">    var a;</span><br><span class="line">    alert(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>问: test();和 new test(); 窗口分别弹出什么？<br>答：0 5 0 和 0 undefined 0<br>提示：预编译 AO = {this: {}, a: undefined}. 函数执行test()里预编译this指向调用此函数的对象，在这里就是window。而new test() 预编译时，this = Object.create(test.prototype);</p>
+<h4 id="三-原型"><a href="#三-原型" class="headerlink" title="三.原型"></a>三.原型</h4><p>分析完构造函数，不得不想起原型…<br>原型也是对象，定义了构造函数实例的共有祖先，也就是实例都可以使用访问的属性，方法。为了节省代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Fish.prototype = &#123;</span><br><span class="line">    color: <span class="string">"red"</span>,</span><br><span class="line">    hobby: <span class="string">"bubble"</span>,</span><br><span class="line">    eat: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        console.log(<span class="string">"food"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    family: &#123;</span><br><span class="line">        mother: <span class="string">"AdultFemaleFish"</span>,</span><br><span class="line">        father: <span class="string">"AdultMaleFish"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> Fish (size, name) &#123;</span><br><span class="line">    this.size = size;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">var FattyFish = new Fish (200, <span class="string">"Fatty"</span>);</span><br><span class="line">var SlimFish = new Fish (100, <span class="string">"Slim"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>因为Fatty 和 Slim 都是红鱼，都有老爸老妈，都喜欢吹泡泡，都可以吃food，所以这些都可以写在prototype上。其它特别的size name就可以自定义。</p>
+<p>如果：Slim与众不同，想这样做<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SlimFish.color = <span class="string">"green"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>它只是给自己增加了color属性到那个自己独一无二this对象里，并没有改变原型上的color。当SlimFish再次访问color属性时，会先从自己那里找到。</p>
+<p>如果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SlimFish.prototype.color = <span class="string">"green"</span>; // 报错：Uncaught TypeError: Cannot <span class="built_in">set</span> property <span class="string">'color'</span> of undefined</span><br></pre></td></tr></table></figure></p>
+<p>因为SlimFish并没有prototype属性???</p>
+<p>如果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SlimFish.family.mother = <span class="string">"AdultMaleFish"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>此时，family是在原型上，且指针指向引用值，当SlimFish更改family.mother时，是真的黑进了族谱（引用值）…当FattyFish访问族谱时，就得到mother是”AdultMaleFish” !!!</p>
+<h4 id="四-proto"><a href="#四-proto" class="headerlink" title="四.proto"></a>四.proto</h4><p>问题来了：SlimFish并没有prototype属性，她通过什么改变了族谱的呢？————proto<br>为了让构造函数的实例和他们共有的祖先链接起来，js引擎为每个实例提供了一个隐式属性proto,这个隐式属性指针指向Fish.prototype所指向的对象，也就是他们的共有祖先。他们的共有祖先也是个对象，也有proto，这些proto连接起来，形成了原型链，任何一条鱼沿着proto往上追根溯源，都会找到Object.prototype所指向的引用值，然后接着向上游，是null !!! 所以一切皆对象！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeof null; // <span class="string">"object"</span></span><br></pre></td></tr></table></figure></p>
+<p>如果，想创造一个没有proto属性的对象，可以这样做：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var SmileFish = Object.create(null);</span><br></pre></td></tr></table></figure></p>
+<p>意思是创造一个原型为null的SmileFish<br>SmileFish的proto按照约定会指向null所指向的对象，然而null是原始值，它并不指向任何对象，所以SmileFish就没有proto.</p>
+<h4 id="五-constructor"><a href="#五-constructor" class="headerlink" title="五.constructor"></a>五.constructor</h4><p>constructor 也是像proto一样，是实例的一个隐式属性，指向实例的构造函数。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">console.log(FattyFish.constructor); // native code Object </span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">BadFish</span></span> () &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">var EndFish = new BadFish ();</span><br><span class="line">console.log(EndFish.constructor) //<span class="keyword">function</span> BadFish</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/预编译/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/预编译/" itemprop="url">预编译</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T16:48:33+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>写在前面：…我更换了电脑系统，没想到导致以前的blog文件丢失了…万般无奈，心痛，在DELETE之前仓库之前，访问了最后一次我的blog，并复制了我觉得历经千辛万苦才写出的文字，在这里再次展出来。中午发现丢失，直到现在才搞好…中间又踩了很多坑比如：npm上和cnpm上下载的hexo版本不同了，一查发现hexo两天前更新了):……(:</p>
+<h4 id="一-introduction"><a href="#一-introduction" class="headerlink" title="一.introduction"></a>一.introduction</h4><p>今天回头看了看，觉得函数执行前预编译可以拿出来讲讲。因为这其中涉及一些页面运行顺序步骤，和函数执行的内部情况，作用域链等等，可以帮我们很好地了解函数作用域，全局变量和局部变量，页面运行背后经历了什么。</p>
+<h4 id="二-基础概念"><a href="#二-基础概念" class="headerlink" title="二.基础概念"></a>二.基础概念</h4><p>JS是解释型语言，解一行，运行一行，在解码前会检查语法错误。首先深入了解一些如下基本概念。</p>
+<h5 id="2-1-全局对象GO-global-object"><a href="#2-1-全局对象GO-global-object" class="headerlink" title="2.1 全局对象GO (global object)"></a>2.1 全局对象GO (global object)</h5><p>在浏览器环境下，整个js会执行前创建GO对象，对象里有document是一个{}，还有全局的变量以及function，还有this是指向window，然后window是一个{}，所以可以看做global对象就是window对象，所以window和window的所有属性可以再任何地方被访问，也就是全局变量。全局变量由三种情况产生：</p>
+<ol>
+<li>在最外层被定义</li>
+<li>定义为window的属性</li>
+<li>未定义直接赋值即暗示全局变量</li>
+</ol>
+<p>在nodejs环境下，直接就是global对象，global和global的所有属性可以再任何地方被访问。与浏览器环境下相比，nodejs下的全局变量不可能在最外层被定义，因为没有最外层，只有当前模块。</p>
+<p>所以需要注意：一定养成var声明变量当然还有es6 let,const等，以免造成暗示全局变量，污染命名空间。</p>
+<h5 id="2-2-活动对象AO-action-object"><a href="#2-2-活动对象AO-action-object" class="headerlink" title="2.2 活动对象AO (action object)"></a>2.2 活动对象AO (action object)</h5><p>运行期上下文：是一个作用域，代码执行的环境，有函数级别下的运行期上下文，也有全局的运行期上下文。函数级别的是指函数被调用时，但是函数真正执行前，所创建的一个内部对象。函数每次执行时，都会重新创建一个运行期上下文，并且执行完毕就立即销毁。所以有时会借用形成闭包，让运行期上下文不被销毁，造累加器，或者实现缓存…讲远了<br>AO就是函数运行期上下文，一个作用域。函数被调用时，执行前，预编译而创建。分为四步：</p>
+<ol>
+<li>创建AO对象{this:{proto:,constructor:,},arguments:[]}</li>
+<li>找形参和变量声明，将变量和形参名作为AO属性名，值为undefined: {this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:undefined}</li>
+<li>形参实参相统一：{this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:实参}</li>
+<li>在函数体内找函数声明，值赋予函数体：{this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:实参, 函数: 函数}.<br>这就是预编译，至此四步，创建完毕。<br>可以发现，AO很像GO。感觉整个js是个最外层的大函数，它也会预编译，不过形成的AO就很厉害，叫做GO。</li>
+</ol>
+<h5 id="2-3-scope"><a href="#2-3-scope" class="headerlink" title="2.3 [[scope]]"></a>2.3 [[scope]]</h5><p>JavaScript是面向对象的语言，函数function是其中一个对象，而[[scope]]是函数的一个属性，程序员不可访问，不可读，不可写，仅仅提供给JavaScript引擎存取。[[scope]]也是一个对象，存储着执行期上下文的集合，这个集合呈链式连接，此链接叫做作用域链：scope chain！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">demoA</span></span> () &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">demoB</span></span> () &#123;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    demoB();</span><br><span class="line">&#125;;</span><br><span class="line">demoA();</span><br></pre></td></tr></table></figure>
+<p>以上，定义demoA：demoA.[[scope]] = {0:GO};<br>执行demoA时，创建活动对象AO(以aAO表示): demoA.[[scope]] = {0:aAO, 1GO};<br>执行demoA时，demoB被定义：demoB.[[scope]] = {0:demoA.[[scope]]};<br>执行demoB时，创建活动对象AO(以bAO表示)：demoB.[[scope]] = {0:bAO, 1:demoA.[[scope]]}; 即{0:bAO, 1:aAO, 2:GO};<br>所以当demoB查找变量时，会先从bAO里找，没有找aAO，再GO，GO没有则报错：”sth is not defined”。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -425,7 +1120,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Note2 Posted on 2018-02-06The very essence of romance is uncertainty! this指向call()可以改变this指向：它可以接受很多参数，第一个参数是调用它的函数的this新指向的对象，其余都是调用它的函数的接受的参数。apply()和call()效果一样，区别在于apply只有两个参数，它的第二个参数是一个数组，数组里面是调用它">
+<meta name="keywords" content="misfortune follows super luck">
+<meta property="og:type" content="article">
+<meta property="og:title" content="note1">
+<meta property="og:url" content="http://Fatty-Fish.github.io/2018/03/31/note1/index.html">
+<meta property="og:site_name" content="Fatty-Fish">
+<meta property="og:description" content="Note2 Posted on 2018-02-06The very essence of romance is uncertainty! this指向call()可以改变this指向：它可以接受很多参数，第一个参数是调用它的函数的this新指向的对象，其余都是调用它的函数的接受的参数。apply()和call()效果一样，区别在于apply只有两个参数，它的第二个参数是一个数组，数组里面是调用它">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-31T09:22:03.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="note1">
+<meta name="twitter:description" content="Note2 Posted on 2018-02-06The very essence of romance is uncertainty! this指向call()可以改变this指向：它可以接受很多参数，第一个参数是调用它的函数的this新指向的对象，其余都是调用它的函数的接受的参数。apply()和call()效果一样，区别在于apply只有两个参数，它的第二个参数是一个数组，数组里面是调用它">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Fatty-Fish.github.io/2018/03/31/note1/"/>
+
+
+
+
+
+  <title>note1 | Fatty-Fish</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fatty-Fish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">qjfish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/note1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">note1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T17:17:36+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Note2"><a href="#Note2" class="headerlink" title="Note2"></a>Note2</h3><p> Posted on 2018-02-06<br>The very essence of romance is uncertainty!</p>
+<h4 id="this指向"><a href="#this指向" class="headerlink" title="this指向"></a>this指向</h4><p>call()可以改变this指向：它可以接受很多参数，第一个参数是调用它的函数的this新指向的对象，其余都是调用它的函数的接受的参数。<br>apply()和call()效果一样，区别在于apply只有两个参数，它的第二个参数是一个数组，数组里面是调用它的函数的接受的参数，相当于arguments。</p>
+<p>bind()同样改变this指向，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var fish = <span class="function"><span class="title">function</span></span> () &#123;&#125;;</span><br><span class="line">fish.bind(&#123;···&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>如此，在任何地方，fish函数的this指向都是这个{···}</p>
+<h4 id="for-in"><a href="#for-in" class="headerlink" title="for in"></a>for in</h4><p>数组可以通过for循环，forEach来遍历元素，对象可以用for in枚举：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fish = &#123;</span><br><span class="line">    color:<span class="string">"red"</span>,</span><br><span class="line">    fat: 500</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (prop <span class="keyword">in</span> fish) &#123;</span><br><span class="line">    console.log(prop, fish[prop])</span><br><span class="line">&#125;</span><br><span class="line">// 输出：<span class="string">"color"</span> <span class="string">"red"</span> <span class="string">"fat"</span> 500</span><br></pre></td></tr></table></figure></p>
+<p>但 for in 能输出除了Object.prototype上的属性外，所有原型链上以及对象（fish）自身的所有属性！那问题来了，如果只想要查看自身属性呢？有一个在对象上的方法：Object.prototype.hasOwnProperty(),接受一个属性字符串作为参数。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fish = &#123;</span><br><span class="line">        color: <span class="string">"red"</span>,</span><br><span class="line">        fat: 500</span><br><span class="line">    &#125;</span><br><span class="line">console.log(fish.hasOwnProperty(<span class="string">"color"</span>)); // <span class="literal">true</span></span><br><span class="line">console.log(Object.prototype.hasOwnProperty.call(fish, <span class="string">"color"</span>)); // <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="in"><a href="#in" class="headerlink" title="in"></a>in</h4><p>可以判断字符串是否为对象的一个属性：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fish = &#123;</span><br><span class="line">        color: <span class="string">"red"</span>,</span><br><span class="line">        fat: 500</span><br><span class="line">    &#125;</span><br><span class="line">console.log(<span class="string">"red"</span> <span class="keyword">in</span> fish); // <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><p>可以判断对象是否是这个构造函数构造而来，或者说对象的原型链上有无构造函数的原型。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fish = &#123;</span><br><span class="line">        color: <span class="string">"red"</span>,</span><br><span class="line">        fat: 500</span><br><span class="line">    &#125;;</span><br><span class="line">console.log(fish instanceof Object); // <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>总结：判断是对象或者是数组的方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 第一种：</span><br><span class="line"><span class="keyword">if</span>(O instanceof Array) &#123;</span><br><span class="line">    // <span class="string">"array"</span>;</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    // <span class="string">"object"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>是Array来过滤而不是Object,若是Object会无法过滤。数组的原型链上也有Object,在我理解，数组是个特殊的常用的对象。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 第二种：</span><br><span class="line"><span class="keyword">if</span> (O.constructor == Array) &#123;</span><br><span class="line">    // <span class="string">"array"</span> </span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    // <span class="string">"object"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>BUT 这两种方法都只能在同一网页下才能判断，若果是iframe标签或者其他方式嵌套了网页，则通融不了。可以用强大的Object.prototype.toString然后call一下。看返回的是”[object Array]”还是”[object Object]”.</p>
+<h4 id="逗号运算符"><a href="#逗号运算符" class="headerlink" title="逗号运算符"></a>逗号运算符</h4><p>将类参数列表的值返回最后一个值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr = (1,2,3,4,5) // arr = 5</span><br><span class="line">var f = (<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">"there is a fish"</span>&#125;,<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">"it's a fake fish"</span>&#125;)();</span><br><span class="line">// f = <span class="string">"it's a fake fish"</span> 执行了。</span><br></pre></td></tr></table></figure></p>
+<h4 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h4><p>代替if else<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (fish &gt;= 1000) &#123;</span><br><span class="line">    console.log(<span class="string">"好多鱼"</span>)</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    console.log(<span class="string">"有鱼"</span>)</span><br><span class="line">&#125;</span><br><span class="line">// 等价于</span><br><span class="line">fish &gt;= 1000 ? console.log(<span class="string">"好多鱼"</span>):console.log(<span class="string">"有鱼"</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="arguments-callee"><a href="#arguments-callee" class="headerlink" title="arguments.callee"></a>arguments.callee</h4><p>记录执行时函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">fish</span></span> () &#123;</span><br><span class="line">    conosle.log(arguments.callee)</span><br><span class="line">&#125;</span><br><span class="line">// 整个fish函数。</span><br></pre></td></tr></table></figure></p>
+<h4 id="caller"><a href="#caller" class="headerlink" title="caller"></a>caller</h4><p>输出函数执行时函数环境。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">outerFish</span></span> () &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">innerFish</span></span> () &#123;</span><br><span class="line">        console.log(innerFish.caller) // 整个outerFish</span><br><span class="line">    &#125;;</span><br><span class="line">    innerFish();</span><br><span class="line">    console.log(outerFish.caller); // 外部没有函数环境，为null。</span><br><span class="line">&#125;</span><br><span class="line">outerFish();</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/31/note/" rel="next" title="note">
+                <i class="fa fa-chevron-left"></i> note
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="qj" />
+          <p class="site-author-name" itemprop="name">qj</p>
+           
+              <p class="site-description motion-element" itemprop="description">marking my previous blogs</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Note2"><span class="nav-number">1.</span> <span class="nav-text">Note2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#this指向"><span class="nav-number">1.1.</span> <span class="nav-text">this指向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for-in"><span class="nav-number">1.2.</span> <span class="nav-text">for in</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#in"><span class="nav-number">1.3.</span> <span class="nav-text">in</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instanceof"><span class="nav-number">1.4.</span> <span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逗号运算符"><span class="nav-number">1.5.</span> <span class="nav-text">逗号运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三目运算符"><span class="nav-number">1.6.</span> <span class="nav-text">三目运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#arguments-callee"><span class="nav-number">1.7.</span> <span class="nav-text">arguments.callee</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#caller"><span class="nav-number">1.8.</span> <span class="nav-text">caller</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qj</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
