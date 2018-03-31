@@ -264,6 +264,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/2018阿里在线编程genCssSelector/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/2018阿里在线编程genCssSelector/" itemprop="url">2018阿里在线编程genCssSelector</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T17:32:40+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>好吧，我29号中午麻烦了一位好心的小哥哥帮我内推了阿里蚂蚁金服，投了简历，做了在线素质测评…我以为会考些前端基础知识，没想到是一些图表理解，阅读理解，几何智力题，还有心理性格测试题，一脸茫然，紧张的做完了。<br>想着在线编程题会不会也很出人意料呢？就打算第二天下课抽时间做。晚上还是压不住好奇，上网搜了搜大概是什么类型的题，看了最近几年的，好像都涉及递归啊，算法啊，数组啊这类的。都大概自己想了想要怎么做，分析了别人是怎么做的，他的经验等。又看到一个CSDN博主分享了自己18年3月21日做的编程题，，，对的，第二天上午，我点开编程题，就是那道！！！<br>我小小的惊喜了一下，立即开始在我本地的vscode上编程。<br>时间也很紧张，只记得昨天看的时候那个博主有一个localName来获取标签名称，不认识（localNmae是xml语法）所以查了一下。<br>题目是这样的：实现genCssSelector函数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"page"</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div class=<span class="string">"content main"</span>&gt;</span><br><span class="line">            main</span><br><span class="line">            &lt;div class=<span class="string">"refer"</span>&gt;</span><br><span class="line">                refer</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;li&gt;li&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;li&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">                    ...</span><br><span class="line"></span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">       var genCssSelector = <span class="keyword">function</span> (target) &#123;</span><br><span class="line">            // your code here</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        document.addEventListener(<span class="string">'click'</span>, <span class="keyword">function</span> (e) &#123;</span><br><span class="line"></span><br><span class="line">            //点击li时，返回：html body <span class="comment">#page .content.main .refer ul li</span></span><br><span class="line"></span><br><span class="line">            console.log(genCssSelector(e.target));</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>于是我还是按照我自己想的思路，用递归。<br>可是当我写完，测试出来是undefined，正在准备调试时，时间只有1分多钟了，赶忙把本地代码复制粘贴过去，很混乱，抢着十多秒时间调了一下格式，还没调试完，就自动交卷了…<br>于是沉下心来，看我哪里错了，找出来后，我特别恨自己给自己挖坑。以下是我已经改好的了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">var genCssSelector = <span class="keyword">function</span> (target) &#123;</span><br><span class="line">     // your code here</span><br><span class="line">     //arr用于记录最终的name</span><br><span class="line">     var arr = [];</span><br><span class="line">     // find 来实现递归</span><br><span class="line">     <span class="keyword">function</span> find(target) &#123;</span><br><span class="line">         <span class="keyword">if</span> (target.localName) &#123;</span><br><span class="line">             //如果是标签（排除document）</span><br><span class="line">             <span class="keyword">if</span> (target.className) &#123;</span><br><span class="line">                 // 如果有className</span><br><span class="line">                 var str = <span class="string">""</span></span><br><span class="line">                 var arr1 = target.className.split(<span class="string">" "</span>);</span><br><span class="line">                 var len = arr1.length;</span><br><span class="line">                 <span class="keyword">for</span> (var i = 0; i &lt; len; i++) &#123;</span><br><span class="line">                     str += <span class="string">"."</span> + arr1[i];</span><br><span class="line">                 &#125;</span><br><span class="line">                 arr.push(str);</span><br><span class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target.id) &#123;</span><br><span class="line">                 // 如果idName</span><br><span class="line">                 var str = <span class="string">""</span></span><br><span class="line">                 str = <span class="string">"#"</span> + target.id;</span><br><span class="line">                 arr.push(str);</span><br><span class="line">             &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                 // 只有标签名</span><br><span class="line">                 arr.push(target.localName)</span><br><span class="line">             &#125;</span><br><span class="line">             //把当前target的父级标签传入find函数</span><br><span class="line">             find(target.parentNode);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     //find函数初始自执行</span><br><span class="line">     //find(target);</span><br><span class="line">     //arr此时是一个从里面（li）到外面（html）标签的数组，reverse满足题目要求从外面到里面，数组toString方法将数组合成字符串，replace正则全局匹配<span class="string">","</span>替换为空格。</span><br><span class="line">     <span class="built_in">return</span> arr.reverse().toString().replace(/\,/g, <span class="string">" "</span>)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>说说我交上去的代码错在哪里：第一个，我直接用genCssSelector来实现递归，这样每次arr都会被刷新为[]，所以当然啥也没有了，，，等我下来后改了才增加了find函数。第二个，也没有时间写reverse，toString和replace了，有时间只把arr找出来都不错了，还是自己编程时没有给自己限制时间，每次都take my time，这次跌了个大跤。第三个，我用了一个xml的localName，哈哈哈，这能怪我吗？我当时只记得他了。。。说回来，作为前端开发者需要知道xml的语言才对。localName和nodeName作用一样一样的。</p>
+<p>再来看看那位博主的思路：他用的while循环，嗯，非常不错。（其实思路是一样的，只是实现方法不一样。。。）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var genCssSelector = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    // your code here</span><br><span class="line">    var path = [];</span><br><span class="line">    var current = arguments[0];</span><br><span class="line">    <span class="keyword">while</span>(current.localName)&#123;</span><br><span class="line">        <span class="keyword">if</span>(current.id)&#123;</span><br><span class="line">            path.push(<span class="string">"#"</span>+current.id);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(current.className)&#123;</span><br><span class="line">            var tmp = current.className.split(<span class="string">" "</span>);</span><br><span class="line">            var str = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">for</span>(var i <span class="keyword">in</span> tmp)&#123;</span><br><span class="line">                str += <span class="string">"."</span>+tmp[i];</span><br><span class="line">            &#125;</span><br><span class="line">            path.push(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!current.id &amp;&amp; !current.className)&#123;</span><br><span class="line">            path.push(current.localName)</span><br><span class="line">        &#125;</span><br><span class="line">        current = current.parentNode;</span><br><span class="line">    &#125;</span><br><span class="line">    path.reverse();</span><br><span class="line">    <span class="built_in">return</span> path.toString().replace(/\,/g,<span class="string">" "</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在还在等待面试电话，每天坐立不安，各种复习，看了看准网别人的经验，这几天都在加紧复习promise，nodejs, es6,昨天又再仔细研究了一下promise源码，希望暑期能去实习，非常希望。webpack,vue不虚，因为最近做过项目，还是比较熟悉的。gulp也还不虚，曾经做过项目。希望能面试通过！就算要笔试也不虚！就是想进，就是不怕。。。哈哈哈连我都相信了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/note1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1120,7 +1245,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
