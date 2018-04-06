@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="单线程的jsjs是单线程的，运行一行执行一行，当遇到需要加载资源的 script 等标签，会阻塞，直到资源加载回来。为了不阻塞，让资源在另一个线程异步加载，可以配置async和defer，defer是IE浏览器适配，加载完成后按照顺序执行，async是其他主流浏览器适配，加载完成即刻执行。还有有src属性的标签自动异步加载，加载完成后会触发onload事件。 异步编程这里有事件异步：像click事">
+<meta name="keywords" content="misfortune follows super luck">
+<meta property="og:type" content="article">
+<meta property="og:title" content="promise">
+<meta property="og:url" content="http://Fatty-Fish.github.io/2018/04/05/promise/index.html">
+<meta property="og:site_name" content="Fatty-Fish">
+<meta property="og:description" content="单线程的jsjs是单线程的，运行一行执行一行，当遇到需要加载资源的 script 等标签，会阻塞，直到资源加载回来。为了不阻塞，让资源在另一个线程异步加载，可以配置async和defer，defer是IE浏览器适配，加载完成后按照顺序执行，async是其他主流浏览器适配，加载完成即刻执行。还有有src属性的标签自动异步加载，加载完成后会触发onload事件。 异步编程这里有事件异步：像click事">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-06T14:06:53.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="promise">
+<meta name="twitter:description" content="单线程的jsjs是单线程的，运行一行执行一行，当遇到需要加载资源的 script 等标签，会阻塞，直到资源加载回来。为了不阻塞，让资源在另一个线程异步加载，可以配置async和defer，defer是IE浏览器适配，加载完成后按照顺序执行，async是其他主流浏览器适配，加载完成即刻执行。还有有src属性的标签自动异步加载，加载完成后会触发onload事件。 异步编程这里有事件异步：像click事">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Fatty-Fish.github.io/2018/04/05/promise/"/>
+
+
+
+
+
+  <title>promise | Fatty-Fish</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fatty-Fish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">qjfish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/04/05/promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">promise</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-05T21:19:56+08:00">
+                2018-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="单线程的js"><a href="#单线程的js" class="headerlink" title="单线程的js"></a>单线程的js</h4><p>js是单线程的，运行一行执行一行，当遇到需要加载资源的 script 等标签，会阻塞，直到资源加载回来。为了不阻塞，让资源在另一个线程异步加载，可以配置async和defer，defer是IE浏览器适配，加载完成后按照顺序执行，async是其他主流浏览器适配，加载完成即刻执行。还有有src属性的标签自动异步加载，加载完成后会触发onload事件。</p>
+<h4 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h4><p>这里有事件异步：像click事件，需要绑定后才能实现。<br>还有ajax回调函数，但是如果很多ajax请求层层依赖才能实现一个请求，则会嵌套上很多层，代码别人会难读。<br>所以有了promise，可以整理为异步操作执行完成后，链式调用执行回调函数，回调函数仍热有异步操作，还可继续链式调用。更加易读，结构更清晰。</p>
+<h4 id="promise简单使用"><a href="#promise简单使用" class="headerlink" title="promise简单使用"></a>promise简单使用</h4><p>promise是一个构造函数。接受一个函数作为参数，函数立即执行。原型上有then方法，管理响应成功或者失败的回调函数。有pending，resolved，rejected三种状态。只能pending-&gt;resolved或者pending-&gt;rejected.<br>promise对象里执行resolved还是执行rejected影响着接下来的then里是执行第一个参数函数还是第二个。也决定了当前promise对象的状态是resolved还是rejected。</p>
+<h4 id="promise源码"><a href="#promise源码" class="headerlink" title="promise源码"></a>promise源码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">promise</span> (<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span></span><br><span class="line">    self.promiseStatus = <span class="string">"pending"</span>;</span><br><span class="line">    self.value = <span class="string">""</span>;</span><br><span class="line">    self.resolvedList = [];</span><br><span class="line">    self.rejectedList = [];</span><br><span class="line">    fn(resolved, rejected);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">resolved</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (self.promiseStatus === <span class="string">"pending"</span>) &#123;</span><br><span class="line">            self.promiseStatus === <span class="string">"resolved"</span>;</span><br><span class="line">            self.value = data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (self.resolvedList.length) &#123;</span><br><span class="line">            self.resolvedList.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">ele</span>) </span>&#123;</span><br><span class="line">                ele();</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">rejected</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (self.promiseStatus === <span class="string">"pending"</span>) &#123;</span><br><span class="line">            self.promiseStatus === <span class="string">"rejected"</span>;</span><br><span class="line">            self.value = data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (self.rejectedList.length) &#123;</span><br><span class="line">            self.rejectedList.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">ele</span>) </span>&#123;</span><br><span class="line">                ele();</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">promise.prototype.then = <span class="function"><span class="keyword">function</span> (<span class="params">onResolved, onRejected</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">typeof</span> onResolved === <span class="string">"function"</span> ? onResolved : <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;&#125;;</span><br><span class="line">    <span class="keyword">typeof</span> onRejected === <span class="string">"function"</span> ? onRejected : <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;&#125;; </span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">if</span> (self.promiseStatus === <span class="string">"resolved"</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> val = onResolved(self.value);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> promise(<span class="function"><span class="keyword">function</span> (<span class="params">resolved, rejected</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// val 可能为单纯的值或者promise对象。</span></span><br><span class="line">            <span class="keyword">if</span>(val <span class="keyword">instanceof</span> promise) &#123;</span><br><span class="line">                <span class="comment">// 巧妙：val为promise对象，它的状态决定了整个外面的then的状态，也决定了自己的val.then是执行第一个函数还是第二个函数。在这里都设置为resolved和rejected</span></span><br><span class="line">                val.then(resolved, rejected)</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                resolved(val)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (self.promiseStatus === <span class="string">"rejected"</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> val = onRejected(self.value);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> promise(<span class="function"><span class="keyword">function</span> (<span class="params">resolved, rejected</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(val <span class="keyword">instanceof</span> promise) &#123;</span><br><span class="line">                val.then(resolved, rejected)</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 如果val不为promise对象，那整个外面的then不论执行第一个函数还是执行第二个函数，状态都会是resolved，</span></span><br><span class="line">                resolved(val)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (self.promiseStatus === <span class="string">"pending"</span>) &#123;</span><br><span class="line">        <span class="comment">//promise对象延迟改变状态，但是代码已经执行到它的then了，仍然会return一个promise对象</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> promise(<span class="function"><span class="keyword">function</span> (<span class="params">resolved,rejected</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//把改变then状态的函数推到两个数组中，将数组在promise对象的resolved或者rejected里执行。即让改变then状态的函数也跟着promise对象的resolved或rejected延迟执行。</span></span><br><span class="line">            self.resolvedList.push(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">//这个函数被保存到list中，形成闭包，作用域链并未释放，</span></span><br><span class="line">                <span class="keyword">var</span> val = onResolved(self.value);</span><br><span class="line">                <span class="keyword">if</span>(val <span class="keyword">instanceof</span> promise) &#123;</span><br><span class="line">                    <span class="comment">// 所以这里的resolved和rejected还是同样的作用</span></span><br><span class="line">                    val.then(resolved, rejected)</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    resolved(val)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            self.rejectedList.push(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> val = onRejected(self.value);</span><br><span class="line">                <span class="keyword">if</span>(val <span class="keyword">instanceof</span> promise) &#123;</span><br><span class="line">                    val.then(resolved, rejected)</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    rejected(val)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="catch"><a href="#catch" class="headerlink" title="catch"></a>catch</h4><p>和then的第二个参数一样，指定rejected的回调<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>但是catch有个好处，当then里报错，会直接往下执行catch，并把错误信息传到err，打印出，和try，catch语句一样。</p>
+<h4 id="all"><a href="#all" class="headerlink" title="all"></a>all</h4><p>Promise.all方法可以让多个异步操作执行完成后，再调用then执行回调。all接收一个数组参数，里面的值最终都是返回Promise对象。这样，多个异步操作的并行执行的，等到它们都执行完后才会进到then里面。异步返回的数据都在then里面，all会把所有异步操作的结果放进一个数组中传给then。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span></span><br><span class="line">.all([fn1(), fn2(), fn3()])</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">dataarr</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(dataarr);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="race"><a href="#race" class="headerlink" title="race"></a>race</h4><p>Promise.race方法和all一样，但是all是最后一个执行完成，进入下一步。而race是一旦有一个就进入下一步。可以应用于图片加载超时执行相应代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span></span><br><span class="line">.race([imgFn(), timeout()])</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span>(<span class="params">reason</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当imgFn先执行完成，触发里面的resolved函数，则会执行then。当timeout先执行完成，则会触发里面的rejected函数，则会触发catch函数。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/31/2018阿里在线编程genCssSelector/" rel="next" title="2018阿里在线编程genCssSelector">
+                <i class="fa fa-chevron-left"></i> 2018阿里在线编程genCssSelector
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="qj" />
+          <p class="site-author-name" itemprop="name">qj</p>
+           
+              <p class="site-description motion-element" itemprop="description">marking my previous blogs</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#单线程的js"><span class="nav-number">1.</span> <span class="nav-text">单线程的js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步编程"><span class="nav-number">2.</span> <span class="nav-text">异步编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#promise简单使用"><span class="nav-number">3.</span> <span class="nav-text">promise简单使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#promise源码"><span class="nav-number">4.</span> <span class="nav-text">promise源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#catch"><span class="nav-number">5.</span> <span class="nav-text">catch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#all"><span class="nav-number">6.</span> <span class="nav-text">all</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#race"><span class="nav-number">7.</span> <span class="nav-text">race</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qj</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
