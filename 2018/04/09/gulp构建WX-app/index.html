@@ -103,7 +103,7 @@
 <meta property="og:description" content="前几天不小心错误操作，把微信小程序里的images文件夹里多了几个GIF图片和一个6M的压缩包，然后预览时就超过了限制的2M，于是网上搜索该怎么办啊？ setData小程序的视图层和逻辑层是相互独立的模块。视图层是建立于webview容器之上，而逻辑层是javascriptCore运行，数据传输依靠evaluateJavascript执行：数据首先被转换为字符串，字符串被包装为js脚本，再通过脚本">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://fatty-fish.github.io/2018/04/09/gulp构建WX-app/images/auto.png">
-<meta property="og:updated_time" content="2018-04-11T11:02:45.313Z">
+<meta property="og:updated_time" content="2018-04-11T11:11:26.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gulp构建WX-app">
 <meta name="twitter:description" content="前几天不小心错误操作，把微信小程序里的images文件夹里多了几个GIF图片和一个6M的压缩包，然后预览时就超过了限制的2M，于是网上搜索该怎么办啊？ setData小程序的视图层和逻辑层是相互独立的模块。视图层是建立于webview容器之上，而逻辑层是javascriptCore运行，数据传输依靠evaluateJavascript执行：数据首先被转换为字符串，字符串被包装为js脚本，再通过脚本">
@@ -357,7 +357,7 @@
 </ul>
 <p>当前我们建议开发者尽量减少使用大图片资源。</p>
 <h5 id="我的图片"><a href="#我的图片" class="headerlink" title="我的图片"></a>我的图片</h5><p>上面说了，我就是失误操作，导致图片过多，都无法预览。当时我想了两种办法：第一种，把图片资源放到easy-mock上，页面加载时get一下。但是我没有找到方法（后续有好方法我会补上）。第二种方法，把微信小程序里的代码用打包工具压缩一下，首先要的就是压缩图片。于是我开通了腾讯云，开通了nodejs环境，想要require一下webpack或者gulp。但是报错了，并没有找到gulp.js</p>
-<p>后来，我发现，微信小程序自带压缩功能，如图：<br><img src="./images/auto.png" alt="微信自带压缩功能截图"></p>
+<p>后来，我发现，微信小程序自带压缩功能，如图：<br><img src="./images/auto.png" width="200px" height="100px"></p>
 
       
     </div>
