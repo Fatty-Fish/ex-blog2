@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="写在前面：…我更换了电脑系统，没想到导致以前的blog文件丢失了…万般无奈，心痛，在DELETE之前仓库之前，访问了最后一次我的blog，并复制了我觉得历经千辛万苦才写出的文字，在这里再次展出来。中午发现丢失，直到现在才搞好…中间又踩了很多坑比如：npm上和cnpm上下载的hexo版本不同了，一查发现hexo两天前更新了):……(: 一.introduction今天回头看了看，觉得函数执行前预编译">
+<meta name="description" content="前几天不小心错误操作，把微信小程序里的images文件夹里多了几个GIF图片和一个6M的压缩包，然后预览时就超过了限制的2M，于是网上搜索该怎么办啊？ setData小程序的视图层和逻辑层是相互独立的模块。视图层是建立于webview容器之上，而逻辑层是javascriptCore运行，数据传输依靠evaluateJavascript执行：数据首先被转换为字符串，字符串被包装为js脚本，再通过脚本">
 <meta name="keywords" content="misfortune follows super luck">
 <meta property="og:type" content="article">
-<meta property="og:title" content="预编译">
-<meta property="og:url" content="http://Fatty-Fish.github.io/2018/03/31/预编译/index.html">
+<meta property="og:title" content="gulp构建WX-app">
+<meta property="og:url" content="http://Fatty-Fish.github.io/2018/04/09/gulp构建WX-app/index.html">
 <meta property="og:site_name" content="Fatty-Fish">
-<meta property="og:description" content="写在前面：…我更换了电脑系统，没想到导致以前的blog文件丢失了…万般无奈，心痛，在DELETE之前仓库之前，访问了最后一次我的blog，并复制了我觉得历经千辛万苦才写出的文字，在这里再次展出来。中午发现丢失，直到现在才搞好…中间又踩了很多坑比如：npm上和cnpm上下载的hexo版本不同了，一查发现hexo两天前更新了):……(: 一.introduction今天回头看了看，觉得函数执行前预编译">
+<meta property="og:description" content="前几天不小心错误操作，把微信小程序里的images文件夹里多了几个GIF图片和一个6M的压缩包，然后预览时就超过了限制的2M，于是网上搜索该怎么办啊？ setData小程序的视图层和逻辑层是相互独立的模块。视图层是建立于webview容器之上，而逻辑层是javascriptCore运行，数据传输依靠evaluateJavascript执行：数据首先被转换为字符串，字符串被包装为js脚本，再通过脚本">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-31T09:07:58.846Z">
+<meta property="og:updated_time" content="2018-04-11T10:49:57.096Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="预编译">
-<meta name="twitter:description" content="写在前面：…我更换了电脑系统，没想到导致以前的blog文件丢失了…万般无奈，心痛，在DELETE之前仓库之前，访问了最后一次我的blog，并复制了我觉得历经千辛万苦才写出的文字，在这里再次展出来。中午发现丢失，直到现在才搞好…中间又踩了很多坑比如：npm上和cnpm上下载的hexo版本不同了，一查发现hexo两天前更新了):……(: 一.introduction今天回头看了看，觉得函数执行前预编译">
+<meta name="twitter:title" content="gulp构建WX-app">
+<meta name="twitter:description" content="前几天不小心错误操作，把微信小程序里的images文件夹里多了几个GIF图片和一个6M的压缩包，然后预览时就超过了限制的2M，于是网上搜索该怎么办啊？ setData小程序的视图层和逻辑层是相互独立的模块。视图层是建立于webview容器之上，而逻辑层是javascriptCore运行，数据传输依靠evaluateJavascript执行：数据首先被转换为字符串，字符串被包装为js脚本，再通过脚本">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://Fatty-Fish.github.io/2018/03/31/预编译/"/>
+  <link rel="canonical" href="http://Fatty-Fish.github.io/2018/04/09/gulp构建WX-app/"/>
 
 
 
 
 
-  <title>预编译 | Fatty-Fish</title>
+  <title>gulp构建WX-app | Fatty-Fish</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/预编译/">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/04/09/gulp构建WX-app/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qj">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">预编译</h1>
+          <h1 class="post-title" itemprop="name headline">gulp构建WX-app</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T16:48:33+08:00">
-                2018-03-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T23:05:44+08:00">
+                2018-04-09
               </time>
             
 
@@ -330,27 +330,32 @@
       
 
       
-        <p>写在前面：…我更换了电脑系统，没想到导致以前的blog文件丢失了…万般无奈，心痛，在DELETE之前仓库之前，访问了最后一次我的blog，并复制了我觉得历经千辛万苦才写出的文字，在这里再次展出来。中午发现丢失，直到现在才搞好…中间又踩了很多坑比如：npm上和cnpm上下载的hexo版本不同了，一查发现hexo两天前更新了):……(:</p>
-<h4 id="一-introduction"><a href="#一-introduction" class="headerlink" title="一.introduction"></a>一.introduction</h4><p>今天回头看了看，觉得函数执行前预编译可以拿出来讲讲。因为这其中涉及一些页面运行顺序步骤，和函数执行的内部情况，作用域链等等，可以帮我们很好地了解函数作用域，全局变量和局部变量，页面运行背后经历了什么。</p>
-<h4 id="二-基础概念"><a href="#二-基础概念" class="headerlink" title="二.基础概念"></a>二.基础概念</h4><p>JS是解释型语言，解一行，运行一行，在解码前会检查语法错误。首先深入了解一些如下基本概念。</p>
-<h5 id="2-1-全局对象GO-global-object"><a href="#2-1-全局对象GO-global-object" class="headerlink" title="2.1 全局对象GO (global object)"></a>2.1 全局对象GO (global object)</h5><p>在浏览器环境下，整个js会执行前创建GO对象，对象里有document是一个{}，还有全局的变量以及function，还有this是指向window，然后window是一个{}，所以可以看做global对象就是window对象，所以window和window的所有属性可以再任何地方被访问，也就是全局变量。全局变量由三种情况产生：</p>
+        <p>前几天不小心错误操作，把微信小程序里的images文件夹里多了几个GIF图片和一个6M的压缩包，然后预览时就超过了限制的2M，于是网上搜索该怎么办啊？</p>
+<h4 id="setData"><a href="#setData" class="headerlink" title="setData"></a>setData</h4><p>小程序的视图层和逻辑层是相互独立的模块。视图层是建立于webview容器之上，而逻辑层是javascriptCore运行，数据传输依靠evaluateJavascript执行：数据首先被转换为字符串，字符串被包装为js脚本，再通过脚本执行方式，分别传达给视图层和逻辑层。数据到达视图层并不是实时的。同一个进程内webview共享一个 js VM，而且当webview的js线程同时还在执行其他逻辑渲染时，会延迟evaluateJavascript的执行。而且多个webview会争抢js VM。所以数据传输速度受到影响。</p>
 <ol>
-<li>在最外层被定义</li>
-<li>定义为window的属性</li>
-<li>未定义直接赋值即暗示全局变量</li>
+<li>频繁使用setData</li>
 </ol>
-<p>在nodejs环境下，直接就是global对象，global和global的所有属性可以再任何地方被访问。与浏览器环境下相比，nodejs下的全局变量不可能在最外层被定义，因为没有最外层，只有当前模块。</p>
-<p>所以需要注意：一定养成var声明变量当然还有es6 let,const等，以免造成暗示全局变量，污染命名空间。</p>
-<h5 id="2-2-活动对象AO-action-object"><a href="#2-2-活动对象AO-action-object" class="headerlink" title="2.2 活动对象AO (action object)"></a>2.2 活动对象AO (action object)</h5><p>运行期上下文：是一个作用域，代码执行的环境，有函数级别下的运行期上下文，也有全局的运行期上下文。函数级别的是指函数被调用时，但是函数真正执行前，所创建的一个内部对象。函数每次执行时，都会重新创建一个运行期上下文，并且执行完毕就立即销毁。所以有时会借用形成闭包，让运行期上下文不被销毁，造累加器，或者实现缓存…讲远了<br>AO就是函数运行期上下文，一个作用域。函数被调用时，执行前，预编译而创建。分为四步：</p>
-<ol>
-<li>创建AO对象{this:{proto:,constructor:,},arguments:[]}</li>
-<li>找形参和变量声明，将变量和形参名作为AO属性名，值为undefined: {this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:undefined}</li>
-<li>形参实参相统一：{this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:实参}</li>
-<li>在函数体内找函数声明，值赋予函数体：{this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:实参, 函数: 函数}.<br>这就是预编译，至此四步，创建完毕。<br>可以发现，AO很像GO。感觉整个js是个最外层的大函数，它也会预编译，不过形成的AO就很厉害，叫做GO。</li>
+<p>w3cschool给粗案列：</p>
+<pre><code>* Android 下用户在滑动时会感觉到卡顿，操作反馈延迟严重，因为 JS 线程一直在编译执行渲染，未能及时将用户操作事件传递到逻辑层，逻辑层亦无法及时将操作处理结果及时传递到视图层；
+* 渲染有出现延时，由于 WebView 的 JS 线程一直处于忙碌状态，逻辑层到页面层的通信耗时上升，视图层收到的数据消息时距离发出时间已经过去了几百毫秒，渲染的结果并不实时；
+</code></pre><ol start="2">
+<li>操作大量新数据</li>
 </ol>
-<h5 id="2-3-scope"><a href="#2-3-scope" class="headerlink" title="2.3 [[scope]]"></a>2.3 [[scope]]</h5><p>JavaScript是面向对象的语言，函数function是其中一个对象，而[[scope]]是函数的一个属性，程序员不可访问，不可读，不可写，仅仅提供给JavaScript引擎存取。[[scope]]也是一个对象，存储着执行期上下文的集合，这个集合呈链式连接，此链接叫做作用域链：scope chain！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">demoA</span></span> () &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">demoB</span></span> () &#123;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    demoB();</span><br><span class="line">&#125;;</span><br><span class="line">demoA();</span><br></pre></td></tr></table></figure>
-<p>以上，定义demoA：demoA.[[scope]] = {0:GO};<br>执行demoA时，创建活动对象AO(以aAO表示): demoA.[[scope]] = {0:aAO, 1GO};<br>执行demoA时，demoB被定义：demoB.[[scope]] = {0:demoA.[[scope]]};<br>执行demoB时，创建活动对象AO(以bAO表示)：demoB.[[scope]] = {0:bAO, 1:demoA.[[scope]]}; 即{0:bAO, 1:aAO, 2:GO};<br>所以当demoB查找变量时，会先从bAO里找，没有找aAO，再GO，GO没有则报错：”sth is not defined”。</p>
+<p>由上面可知，数据传输是js脚本执行，如果数据过大，必然增加脚本执行负担，拖慢响应速度。</p>
+<ol start="3">
+<li>后台态页面进行 setData</li>
+</ol>
+<p>“当页面进入后台态（用户不可见），不应该继续去进行setData，后台态页面的渲染用户是无法感受的，另外后台态页面去setData也会抢占前台页面的执行。” 这个我想是后台数据传输也用了setData吧，setData是主要视图层与逻辑层数据传输，让用户感受数据改变，既然数据用户都接触不到，就别用setData来占用js线程啦。</p>
+<h4 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h4><p>目前图片资源的主要性能问题在于大图片和长列表图片上，这两种情况都有可能导致 iOS 客户端内存占用上升，从而触发系统回收小程序页面。</p>
+<ul>
+<li><p>图片对内存的影响<br>在 iOS 上，小程序的页面是由多个 WKWebView 组成的，在系统内存紧张时，会回收掉一部分 WKWebView。从过去我们分析的案例来看，大图片和长列表图片的使用会引起 WKWebView 的回收。</p>
+</li>
+<li><p>图片对页面切换的影响<br>除了内存问题外，大图片也会造成页面切换的卡顿。我们分析过的案例中，有一部分小程序会在页面中引用大图片，在页面后退切换中会出现掉帧卡顿的情况。</p>
+</li>
+</ul>
+<p>当前我们建议开发者尽量减少使用大图片资源。</p>
+<h5 id="我的图片"><a href="#我的图片" class="headerlink" title="我的图片"></a>我的图片</h5><p>上面说了，我就是失误操作，导致图片过多，都无法预览。当时我想了两种办法：第一种，把图片资源放到easy-mock上，页面加载时get一下。但是我没有找到方法（后续有好方法我会补上）。第二种方法，把微信小程序里的代码用打包工具压缩一下，首先要的就是压缩图片。于是我开通了腾讯云，开通了nodejs环境，想要require一下webpack或者gulp。但是报错了，并没有找到gulp.js</p>
+<p>后来，我发现，微信小程序自带压缩功能，如图：<br>![…/public/images/auto.png]</p>
 
       
     </div>
@@ -375,8 +380,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/31/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/04/05/promise/" rel="next" title="promise">
+                <i class="fa fa-chevron-left"></i> promise
               </a>
             
           </div>
@@ -384,10 +389,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/31/构造函数/" rel="prev" title="构造函数">
-                构造函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -503,7 +504,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-introduction"><span class="nav-number">1.</span> <span class="nav-text">一.introduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-基础概念"><span class="nav-number">2.</span> <span class="nav-text">二.基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-全局对象GO-global-object"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 全局对象GO (global object)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-活动对象AO-action-object"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 活动对象AO (action object)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-scope"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 [[scope]]</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#setData"><span class="nav-number">1.</span> <span class="nav-text">setData</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片"><span class="nav-number">2.</span> <span class="nav-text">图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#我的图片"><span class="nav-number">2.1.</span> <span class="nav-text">我的图片</span></a></li></ol></li></ol></div>
             
 
           </div>

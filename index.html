@@ -264,6 +264,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/04/09/gulp构建WX-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/09/gulp构建WX-app/" itemprop="url">gulp构建WX-app</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T23:05:44+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前几天不小心错误操作，把微信小程序里的images文件夹里多了几个GIF图片和一个6M的压缩包，然后预览时就超过了限制的2M，于是网上搜索该怎么办啊？</p>
+<h4 id="setData"><a href="#setData" class="headerlink" title="setData"></a>setData</h4><p>小程序的视图层和逻辑层是相互独立的模块。视图层是建立于webview容器之上，而逻辑层是javascriptCore运行，数据传输依靠evaluateJavascript执行：数据首先被转换为字符串，字符串被包装为js脚本，再通过脚本执行方式，分别传达给视图层和逻辑层。数据到达视图层并不是实时的。同一个进程内webview共享一个 js VM，而且当webview的js线程同时还在执行其他逻辑渲染时，会延迟evaluateJavascript的执行。而且多个webview会争抢js VM。所以数据传输速度受到影响。</p>
+<ol>
+<li>频繁使用setData</li>
+</ol>
+<p>w3cschool给粗案列：</p>
+<pre><code>* Android 下用户在滑动时会感觉到卡顿，操作反馈延迟严重，因为 JS 线程一直在编译执行渲染，未能及时将用户操作事件传递到逻辑层，逻辑层亦无法及时将操作处理结果及时传递到视图层；
+* 渲染有出现延时，由于 WebView 的 JS 线程一直处于忙碌状态，逻辑层到页面层的通信耗时上升，视图层收到的数据消息时距离发出时间已经过去了几百毫秒，渲染的结果并不实时；
+</code></pre><ol start="2">
+<li>操作大量新数据</li>
+</ol>
+<p>由上面可知，数据传输是js脚本执行，如果数据过大，必然增加脚本执行负担，拖慢响应速度。</p>
+<ol start="3">
+<li>后台态页面进行 setData</li>
+</ol>
+<p>“当页面进入后台态（用户不可见），不应该继续去进行setData，后台态页面的渲染用户是无法感受的，另外后台态页面去setData也会抢占前台页面的执行。” 这个我想是后台数据传输也用了setData吧，setData是主要视图层与逻辑层数据传输，让用户感受数据改变，既然数据用户都接触不到，就别用setData来占用js线程啦。</p>
+<h4 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h4><p>目前图片资源的主要性能问题在于大图片和长列表图片上，这两种情况都有可能导致 iOS 客户端内存占用上升，从而触发系统回收小程序页面。</p>
+<ul>
+<li><p>图片对内存的影响<br>在 iOS 上，小程序的页面是由多个 WKWebView 组成的，在系统内存紧张时，会回收掉一部分 WKWebView。从过去我们分析的案例来看，大图片和长列表图片的使用会引起 WKWebView 的回收。</p>
+</li>
+<li><p>图片对页面切换的影响<br>除了内存问题外，大图片也会造成页面切换的卡顿。我们分析过的案例中，有一部分小程序会在页面中引用大图片，在页面后退切换中会出现掉帧卡顿的情况。</p>
+</li>
+</ul>
+<p>当前我们建议开发者尽量减少使用大图片资源。</p>
+<h5 id="我的图片"><a href="#我的图片" class="headerlink" title="我的图片"></a>我的图片</h5><p>上面说了，我就是失误操作，导致图片过多，都无法预览。当时我想了两种办法：第一种，把图片资源放到easy-mock上，页面加载时get一下。但是我没有找到方法（后续有好方法我会补上）。第二种方法，把微信小程序里的代码用打包工具压缩一下，首先要的就是压缩图片。于是我开通了腾讯云，开通了nodejs环境，想要require一下webpack或者gulp。但是报错了，并没有找到gulp.js</p>
+<p>后来，我发现，微信小程序自带压缩功能，如图：<br>![…/public/images/auto.png]</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/04/05/promise/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1374,7 +1519,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
