@@ -264,6 +264,268 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/05/15/CSS选择器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/15/CSS选择器/" itemprop="url">CSS选择器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T21:25:31+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="CSS权重"><a href="#CSS权重" class="headerlink" title="CSS权重"></a>CSS权重</h4><p>首先：继承的样式不计算入权重。权重相同时，后面覆盖前面，否则按权重来。<br>最低级别：0， * &gt; + 通配符选择器，子选择器，相邻选择器。*一般用于初始化页面样式，比如去除浏览器默认的margin值（一般默认为8px，ie6是上下左右8px 16px，ie7是11px 16px，ie8是10px 16px），设置页面默认字体样式，背景色等。<br>权重 1，div span 标签选择器，伪元素选择器。<br>权重 10， .wrapper 类选择器，伪类选择器，属性选择器。<br>根据经验，类选择器和标签选择器常常要注意权重，因为当页面结构嵌套比较多时，有可能一堆标签选择器的权重超过类选择器。<br>权重 100，#demo id选择器。 很好用，但我觉得不能多用id，因为id比较特殊，浏览器会时时警惕发生了什么变化，这就好像在js无序列表里给每一个list item注册点击事件一样，太费了。<br>权重 1000， <div style="border: 1px solid black">123</div> 行间样式。行间样式，就像是胎记，每个标签出生时就有的样式。<br>权重 infinite， !important 提升优先级。 写在需要重要强调的样式后面：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">color</span>: green <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="简介一些"><a href="#简介一些" class="headerlink" title="简介一些"></a>简介一些</h4><ol>
+<li>直接子元素选择器：<br>div &gt; a 选择父级为div的a标签。</li>
+<li>后代选择器：<br>div i 选择div下所有i。</li>
+<li>相邻兄弟选择器：<br>div + p 选择div后面紧邻的所有p。</li>
+<li>属性选择器：<br>[attr=”val”] 有attr属性（class,name,type,age,sex）为“val” 的元素。<br>[attr^=”val”]有attr属性以“val”开头的元素。<br>[attr*=”val”]有attr属性包含“val”的元素。<br>[attr$=”val”]有attr属性以“val”结尾的元素。</li>
+<li>伪类选择器：<br>:root 选出文档的根标签。可以兼容：比如在html中，:root代表html标签,在xml文件中，代表xml标签。<br>:not 否定选择器。不要谁。div:not[class^=”nav”]，选出除了class名以nav开头的div。<br>:empty 空标签选择器。标签内啥也没有，空格也不行。伪元素不算元素。<br><strong><em>   伪元素：   </em></strong>逻辑上存在于标签里，但不在domtree中。用“create”来定义的伪元素，因为是创造出了新的元素。不是元素，像元素。<br><strong><em>    伪类：    </em></strong>最初用来描述标签的特定状态：disabled，enabled，checked，target等。后来扩展了定义，成为了逻辑上存在，但在domtree中无需标识的幽灵分类。就像是domtree中某个标签的影子，用“classify”来定义。描述已经存在的符合幽灵类别的元素。<br>:target 目标选择器。 可以选出被locaotion.hash选中的元素。比如：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">src</span> = <span class="string">"#baidu"</span>&gt;</span>baidu.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 假装a标签和div标签分别属于导航栏和内容区 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span> = <span class="string">"baidu"</span>&gt;</span>baidu.com content<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>像这样，当点击a标签，会锚点到id为baidu的div标签。</p>
+<p>:first-child<br>:last-child<br>:nth-child(n)<br>:nth-last-child(n)<br>不限类型。其中n可以为自然数（零除外），公式，even（偶数），odd（奇数）。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">  <span class="selector-tag">ul</span> <span class="selector-tag">li</span><span class="selector-pseudo">:first-child</span> &#123;</span></span><br><span class="line"><span class="undefined">      color: red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>pppp<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>11111<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>22222<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>33333<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>必须符合两个条件：1 是li元素。2 是ul的第一个子元素。所以选不出li标签。</p>
+<p>:first-of-type<br>:last-of-type<br>:nth-of-type(n)<br>:nth-last-of-type()<br>与上面不同，这个是限定类型type。较常用。比如：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">  <span class="selector-tag">li</span><span class="selector-pseudo">:first-of-type</span> &#123;</span></span><br><span class="line"><span class="undefined">      color: red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>44444<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>pppp<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>11111<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>22222<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>33333<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>选出元素必须满足两点：1 必须是li元素。 2 必须是li元素类型中的第一个。所以选出li标签内容分别为11111和44444的。<br>:only-child<br>选出唯一的子元素。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span><span class="selector-pseudo">:only-child</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">color</span><span class="selector-pseudo">:red</span>;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>3<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>满足1 必须是p元素。2 p元素必须是其父级的唯一一个元素。选出第二个p。<br>:only-of-type<br>上一个例子，满足1 必须是p元素。 2 p元素必须是其兄弟节点中唯一一个类型。选出第一个p。</p>
+<p>还有很多很明显的选择器：<br>:disabled<br>:enabled<br>:checked<br>:hover<br>:focus等等。</p>
+<ol start="6">
+<li><p>伪元素选择器<br>通常用于清除浮动流，做一些特别的样式；<br>::after逻辑之后<br>::before之前<br>::first-letter第一个字母<br>::first-line 第一行<br>::selection突出显示文本。需要兼容：火狐 -moz-::selection {}.</p>
+</li>
+<li><p>条件选择器<br>div~span   div标签后面的所有span兄弟节点<br>div+span   div标签后面紧邻的span标签。隔着一个其他标签都不行。<br>div&gt;span   div标签的子元素span。只能是儿子，不可以孙子。话糙理不糙啊。。。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/05/14/知道创宇react学习2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/14/知道创宇react学习2/" itemprop="url">知道创宇react学习2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T22:11:38+08:00">
+                2018-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>做完专业作业，赶快来post新的学习。</p>
+<p>####</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/05/11/知道创宇笔试题半解读/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -346,7 +608,7 @@
 <p><hr></p>
 <h4 id="React"><a href="#React" class="headerlink" title="React"></a>React</h4><p>怎么说呢，毕竟看过Vue的文档，做过小项目，所以看react非常轻松，也能很快明白各个功能，各个原理。然后照着 react<a href="http://www.css88.com/react/docs/hello-world.html" target="_blank" rel="noopener">官网</a><br>初始化了一个react项目，此时的我已经忘了要用hapijs框架了，所以兴致勃勃的开始了一个登录注册页面，开始尝试用react的各种语法，直到涉及到分配路由时。需要用hapijs框架了。<br>react语法特别多，下面总结一下官网的初级指南：</p>
 <ol>
-<li>JSX<br>JSX是JavaScript的拓展语言，全称是 JavaScript XML ，颠覆传统的js. JSX解析时，遇到 &lt; 就解析为HTML，遇到 { 就解析为JavaScript，react使用这种语法来描述 UI。防止注入攻击：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> scriptDom = &lt;div&gt;&#123;inputContent&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<li>JSX<br>JSX是JavaScript的拓展语言，全称是 JavaScript XML ，颠覆传统的js. JSX解析时，遇到 &lt; 就解析为HTML，遇到 { 就解析为JavaScript，react使用这种语法来描述 UI。防止注入攻击：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> scriptDom = <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;inputContent&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>这样把用户输入的内容直接插入标签是安全的。因为，默认，react dom 会在渲染 UI 前格式化JSX中的值，所有数据被转化为字符串了。</p>
@@ -357,15 +619,15 @@
 <p>—- 好梦，洗洗睡了。<br>—- 今天5月11日，再继续：<br>上面提到的函数：React.createElement(),会帮助程序猿检查代码是否有bug，然后会创建一个对象：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意: 这是简化的结构</span></span><br><span class="line"><span class="keyword">const</span> element = &#123;</span><br><span class="line">  type: <span class="string">'MyButton'</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    color: <span class="string">'blue'</span>,</span><br><span class="line">    shadowSize: <span class="number">2</span>,</span><br><span class="line">    children: <span class="string">'Click Me'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>type在这里大写首字母，说明MyButton是一个react组件，element对象是一个react元素，是想要在屏幕上显示内容的描述，react会读取这些元素，创建DOM，并时刻更新他们。</p>
 <ol start="2">
-<li>渲染DOM<br>每个元素都是组件的一部分，ReactDom会负责保持jsDom与ract元素一致。若要将reactDOM渲染进页面，需要一个根元素，多个根元素组成app。将react元素渲染进root DOM，借助ReactDom.render()函数：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> element = &lt;div&gt;Hello, Fatty-Fish! &lt;/div&gt;;</span><br><span class="line">ReactDom.render(</span><br><span class="line">  element,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"root"</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<li>渲染DOM<br>每个元素都是组件的一部分，ReactDom会负责保持jsDom与ract元素一致。若要将reactDOM渲染进页面，需要一个根元素，多个根元素组成app。将react元素渲染进root DOM，借助ReactDom.render()函数：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello, Fatty-Fish! <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">ReactDom.render(</span><br><span class="line">  element,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"root"</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>当要更新这个已经创建的元素，唯一的方法是，创建另一个新的元素代替它。因为元素一旦被创建就是存在在历史中，标识历史某一刻时间点UI。且React只是更新需要更新的part，它会逐一对比新元素与老元素，看哪里变了更新那里。</p>
 <ol start="3">
-<li>components 和 props<br>组件分为函数式组件和class组件。<br>函数式组件：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyComponent</span> (<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (&lt;div&gt;</span><br><span class="line">    &lt;h1&gt;Fatty-Fish!&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;&#123;props.character&#125; girl!&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;)</span><br><span class="line">&#125;;</span><br><span class="line">ReactDom.render(</span><br><span class="line">  &lt;MyComponent character = <span class="string">"good"</span>/&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"root)</span></span><br><span class="line"><span class="string">)</span></span><br></pre></td></tr></table></figure>
+<li>components 和 props<br>组件分为函数式组件和class组件。<br>函数式组件：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyComponent</span> (<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Fatty-Fish!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;props.character&#125; girl!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>)</span><br><span class="line">&#125;;</span><br><span class="line">ReactDom.render(</span><br><span class="line">  &lt;MyComponent character = <span class="string">"good"</span>/&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">"root)</span></span><br><span class="line"><span class="string">)</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>以上写成class组件：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (&lt;div&gt;</span><br><span class="line">    &lt;h1&gt;Fatty-Fish!&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;&#123;this.props.character&#125; girl!&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上写成class组件：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Fatty-Fish!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;this.props.character&#125; girl!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，函数式组件会接受一个props对象，返回一个react元素，对页面的描述。</p>
 <p>我们做react项目时，可以比作一棵树，先做叶子，再到树枝，到树干，再是整个树。比如button，span这种先做出来，抽象为一个组件，组件组合，放到稍大的根元素中，根元素与根元素组合，放到页面中，页面页面组合，变成一个大型应用。还要尽量提取组件，重复利用。</p>
 <p>props是只读的，react组件都是纯函数，不可以修改其参数（props）。但是页面总是动态的，该怎么办？那就是state了。</p>
@@ -1342,297 +1604,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/构造函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qj">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fatty-Fish">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/31/构造函数/" itemprop="url">构造函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T16:56:06+08:00">
-                2018-03-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="一-创建对象"><a href="#一-创建对象" class="headerlink" title="一.创建对象"></a>一.创建对象</h4><p>创建对象可以分为三种方法：</p>
-<ol>
-<li>对象字面量（对象直接量）</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var fish = &#123;</span><br><span class="line">    name: <span class="string">"fatty-fish"</span>,</span><br><span class="line">    sex: <span class="string">"who knows"</span>,</span><br><span class="line">    size: 200,</span><br><span class="line">    hobby:<span class="string">"bubble"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>系统自带构造函数</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var fish = new Object(); // &#123;&#125;</span><br><span class="line">var arrFish = new Array(); // []</span><br><span class="line">var dateFish = new Date(); // &#123;&#125;</span><br><span class="line">var numFish = new Number(); // &#123;&#125;</span><br><span class="line">var strFish = new String(); // &#123;&#125;</span><br><span class="line">var bleanFish = new Boolean(); // &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>以上，五个为系统自带构造函数，都能创建对象，数组是对象，函数是对象，废话。<br>new Number(), new String(), new Boolean()是通过包装类创建的对象，是将原始值（PrimitiveValue）包裹为一个对象。一般是JS为了容错，私下包裹：错误地访问原始值String的长度、为原始值添加属性等等…</p>
-<ol start="3">
-<li>自定义构造函数<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">MakeFish</span></span> () &#123;</span><br><span class="line">    this.name = <span class="string">"slim-fish"</span>;</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.size =  100;</span><br><span class="line">    this.hobby = <span class="string">"bubble too"</span>;</span><br><span class="line">&#125;</span><br><span class="line">var fish = new MakeFish();</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>像这样，我们就自己构造出一条理想的鱼。</p>
-<p>所以，在JS中，Object, Array, function, Date等内部函数都可以创建对象。以及原始值Boolean, String, Number也能被包装成对象。当然撇开undefined和null。</p>
-<h4 id="二-自定义构造函数"><a href="#二-自定义构造函数" class="headerlink" title="二.自定义构造函数"></a>二.自定义构造函数</h4><p>那么自定义构造函数是怎样运行的嘞？<br>借用刚才那条理想的鱼，每次创建新对象时，内部是这样做的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">MakeFish</span></span> () &#123;</span><br><span class="line">    // var this = &#123;&#125;;</span><br><span class="line">    this.name = <span class="string">"slim-fish"</span>;</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.size =  100;</span><br><span class="line">    this.hobby = <span class="string">"bubble too"</span>;</span><br><span class="line">    // <span class="built_in">return</span> this;</span><br><span class="line">&#125;</span><br><span class="line">var fish = new MakeFish();</span><br></pre></td></tr></table></figure></p>
-<p>所以，我们得到的fish其实是return出来的 this 对象。每次new MakeFish()都会这样流程一遍。所以每条鱼是相互独立的。操作每一条鱼，都是在操作不同的this指代的那个对象。</p>
-<p>有这样一道题：结合预编译<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var a = 5;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">test</span></span> () &#123;</span><br><span class="line">    a = 0;</span><br><span class="line">    alert(a);</span><br><span class="line">    alert(this.a);</span><br><span class="line">    var a;</span><br><span class="line">    alert(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>问: test();和 new test(); 窗口分别弹出什么？<br>答：0 5 0 和 0 undefined 0<br>提示：预编译 AO = {this: {}, a: undefined}. 函数执行test()里预编译this指向调用此函数的对象，在这里就是window。而new test() 预编译时，this = Object.create(test.prototype);</p>
-<h4 id="三-原型"><a href="#三-原型" class="headerlink" title="三.原型"></a>三.原型</h4><p>分析完构造函数，不得不想起原型…<br>原型也是对象，定义了构造函数实例的共有祖先，也就是实例都可以使用访问的属性，方法。为了节省代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Fish.prototype = &#123;</span><br><span class="line">    color: <span class="string">"red"</span>,</span><br><span class="line">    hobby: <span class="string">"bubble"</span>,</span><br><span class="line">    eat: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        console.log(<span class="string">"food"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    family: &#123;</span><br><span class="line">        mother: <span class="string">"AdultFemaleFish"</span>,</span><br><span class="line">        father: <span class="string">"AdultMaleFish"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> Fish (size, name) &#123;</span><br><span class="line">    this.size = size;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">var FattyFish = new Fish (200, <span class="string">"Fatty"</span>);</span><br><span class="line">var SlimFish = new Fish (100, <span class="string">"Slim"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>因为Fatty 和 Slim 都是红鱼，都有老爸老妈，都喜欢吹泡泡，都可以吃food，所以这些都可以写在prototype上。其它特别的size name就可以自定义。</p>
-<p>如果：Slim与众不同，想这样做<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SlimFish.color = <span class="string">"green"</span>;</span><br></pre></td></tr></table></figure></p>
-<p>它只是给自己增加了color属性到那个自己独一无二this对象里，并没有改变原型上的color。当SlimFish再次访问color属性时，会先从自己那里找到。</p>
-<p>如果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SlimFish.prototype.color = <span class="string">"green"</span>; // 报错：Uncaught TypeError: Cannot <span class="built_in">set</span> property <span class="string">'color'</span> of undefined</span><br></pre></td></tr></table></figure></p>
-<p>因为SlimFish并没有prototype属性???</p>
-<p>如果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SlimFish.family.mother = <span class="string">"AdultMaleFish"</span>;</span><br></pre></td></tr></table></figure></p>
-<p>此时，family是在原型上，且指针指向引用值，当SlimFish更改family.mother时，是真的黑进了族谱（引用值）…当FattyFish访问族谱时，就得到mother是”AdultMaleFish” !!!</p>
-<h4 id="四-proto"><a href="#四-proto" class="headerlink" title="四.proto"></a>四.proto</h4><p>问题来了：SlimFish并没有prototype属性，她通过什么改变了族谱的呢？————proto<br>为了让构造函数的实例和他们共有的祖先链接起来，js引擎为每个实例提供了一个隐式属性proto,这个隐式属性指针指向Fish.prototype所指向的对象，也就是他们的共有祖先。他们的共有祖先也是个对象，也有proto，这些proto连接起来，形成了原型链，任何一条鱼沿着proto往上追根溯源，都会找到Object.prototype所指向的引用值，然后接着向上游，是null !!! 所以一切皆对象！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeof null; // <span class="string">"object"</span></span><br></pre></td></tr></table></figure></p>
-<p>如果，想创造一个没有proto属性的对象，可以这样做：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var SmileFish = Object.create(null);</span><br></pre></td></tr></table></figure></p>
-<p>意思是创造一个原型为null的SmileFish<br>SmileFish的proto按照约定会指向null所指向的对象，然而null是原始值，它并不指向任何对象，所以SmileFish就没有proto.</p>
-<h4 id="五-constructor"><a href="#五-constructor" class="headerlink" title="五.constructor"></a>五.constructor</h4><p>constructor 也是像proto一样，是实例的一个隐式属性，指向实例的构造函数。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">console.log(FattyFish.constructor); // native code Object </span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">BadFish</span></span> () &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">var EndFish = new BadFish ();</span><br><span class="line">console.log(EndFish.constructor) //<span class="keyword">function</span> BadFish</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/预编译/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qj">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fatty-Fish">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/31/预编译/" itemprop="url">预编译</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T16:48:33+08:00">
-                2018-03-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>写在前面：…我更换了电脑系统，没想到导致以前的blog文件丢失了…万般无奈，心痛，在DELETE之前仓库之前，访问了最后一次我的blog，并复制了我觉得历经千辛万苦才写出的文字，在这里再次展出来。中午发现丢失，直到现在才搞好…中间又踩了很多坑比如：npm上和cnpm上下载的hexo版本不同了，一查发现hexo两天前更新了):……(:</p>
-<h4 id="一-introduction"><a href="#一-introduction" class="headerlink" title="一.introduction"></a>一.introduction</h4><p>今天回头看了看，觉得函数执行前预编译可以拿出来讲讲。因为这其中涉及一些页面运行顺序步骤，和函数执行的内部情况，作用域链等等，可以帮我们很好地了解函数作用域，全局变量和局部变量，页面运行背后经历了什么。</p>
-<h4 id="二-基础概念"><a href="#二-基础概念" class="headerlink" title="二.基础概念"></a>二.基础概念</h4><p>JS是解释型语言，解一行，运行一行，在解码前会检查语法错误。首先深入了解一些如下基本概念。</p>
-<h5 id="2-1-全局对象GO-global-object"><a href="#2-1-全局对象GO-global-object" class="headerlink" title="2.1 全局对象GO (global object)"></a>2.1 全局对象GO (global object)</h5><p>在浏览器环境下，整个js会执行前创建GO对象，对象里有document是一个{}，还有全局的变量以及function，还有this是指向window，然后window是一个{}，所以可以看做global对象就是window对象，所以window和window的所有属性可以再任何地方被访问，也就是全局变量。全局变量由三种情况产生：</p>
-<ol>
-<li>在最外层被定义</li>
-<li>定义为window的属性</li>
-<li>未定义直接赋值即暗示全局变量</li>
-</ol>
-<p>在nodejs环境下，直接就是global对象，global和global的所有属性可以再任何地方被访问。与浏览器环境下相比，nodejs下的全局变量不可能在最外层被定义，因为没有最外层，只有当前模块。</p>
-<p>所以需要注意：一定养成var声明变量当然还有es6 let,const等，以免造成暗示全局变量，污染命名空间。</p>
-<h5 id="2-2-活动对象AO-action-object"><a href="#2-2-活动对象AO-action-object" class="headerlink" title="2.2 活动对象AO (action object)"></a>2.2 活动对象AO (action object)</h5><p>运行期上下文：是一个作用域，代码执行的环境，有函数级别下的运行期上下文，也有全局的运行期上下文。函数级别的是指函数被调用时，但是函数真正执行前，所创建的一个内部对象。函数每次执行时，都会重新创建一个运行期上下文，并且执行完毕就立即销毁。所以有时会借用形成闭包，让运行期上下文不被销毁，造累加器，或者实现缓存…讲远了<br>AO就是函数运行期上下文，一个作用域。函数被调用时，执行前，预编译而创建。分为四步：</p>
-<ol>
-<li>创建AO对象{this:{proto:,constructor:,},arguments:[]}</li>
-<li>找形参和变量声明，将变量和形参名作为AO属性名，值为undefined: {this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:undefined}</li>
-<li>形参实参相统一：{this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:实参}</li>
-<li>在函数体内找函数声明，值赋予函数体：{this:{proto:,constructor:},arguments:[], 变量名:undefined, 形参名:实参, 函数: 函数}.<br>这就是预编译，至此四步，创建完毕。<br>可以发现，AO很像GO。感觉整个js是个最外层的大函数，它也会预编译，不过形成的AO就很厉害，叫做GO。</li>
-</ol>
-<h5 id="2-3-scope"><a href="#2-3-scope" class="headerlink" title="2.3 [[scope]]"></a>2.3 [[scope]]</h5><p>JavaScript是面向对象的语言，函数function是其中一个对象，而[[scope]]是函数的一个属性，程序员不可访问，不可读，不可写，仅仅提供给JavaScript引擎存取。[[scope]]也是一个对象，存储着执行期上下文的集合，这个集合呈链式连接，此链接叫做作用域链：scope chain！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">demoA</span></span> () &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">demoB</span></span> () &#123;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    demoB();</span><br><span class="line">&#125;;</span><br><span class="line">demoA();</span><br></pre></td></tr></table></figure>
-<p>以上，定义demoA：demoA.[[scope]] = {0:GO};<br>执行demoA时，创建活动对象AO(以aAO表示): demoA.[[scope]] = {0:aAO, 1GO};<br>执行demoA时，demoB被定义：demoB.[[scope]] = {0:demoA.[[scope]]};<br>执行demoB时，创建活动对象AO(以bAO表示)：demoB.[[scope]] = {0:bAO, 1:demoA.[[scope]]}; 即{0:bAO, 1:aAO, 2:GO};<br>所以当demoB查找变量时，会先从bAO里找，没有找aAO，再GO，GO没有则报错：”sth is not defined”。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1683,7 +1654,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1696,7 +1667,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
