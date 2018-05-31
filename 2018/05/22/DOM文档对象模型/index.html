@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="做完专业作业，赶快来post新的学习。 ####">
+<meta name="description" content="前几天看回到css，对bfc解决margin塌陷和清除浮动的背后原理还不太明白，浏览了知乎和cnblog上的解释。 fc先说说fc是啥。fc,formating context的缩写。表示页面的一个渲染区域，有一套渲染规则，决定了内部元素怎样排列，相互作用，与外部互不影响。有bfc—-block formating context，是块级元素参与的渲染规则。ifc—–inline formatin">
 <meta name="keywords" content="misfortune follows super luck">
 <meta property="og:type" content="article">
-<meta property="og:title" content="知道创宇react学习2">
-<meta property="og:url" content="http://Fatty-Fish.github.io/2018/05/14/知道创宇react学习2/index.html">
+<meta property="og:title" content="bfc">
+<meta property="og:url" content="http://Fatty-Fish.github.io/2018/05/22/DOM文档对象模型/index.html">
 <meta property="og:site_name" content="Fatty-Fish">
-<meta property="og:description" content="做完专业作业，赶快来post新的学习。 ####">
+<meta property="og:description" content="前几天看回到css，对bfc解决margin塌陷和清除浮动的背后原理还不太明白，浏览了知乎和cnblog上的解释。 fc先说说fc是啥。fc,formating context的缩写。表示页面的一个渲染区域，有一套渲染规则，决定了内部元素怎样排列，相互作用，与外部互不影响。有bfc—-block formating context，是块级元素参与的渲染规则。ifc—–inline formatin">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-15T03:40:24.219Z">
+<meta property="og:updated_time" content="2018-05-31T14:14:01.125Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="知道创宇react学习2">
-<meta name="twitter:description" content="做完专业作业，赶快来post新的学习。 ####">
+<meta name="twitter:title" content="bfc">
+<meta name="twitter:description" content="前几天看回到css，对bfc解决margin塌陷和清除浮动的背后原理还不太明白，浏览了知乎和cnblog上的解释。 fc先说说fc是啥。fc,formating context的缩写。表示页面的一个渲染区域，有一套渲染规则，决定了内部元素怎样排列，相互作用，与外部互不影响。有bfc—-block formating context，是块级元素参与的渲染规则。ifc—–inline formatin">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://Fatty-Fish.github.io/2018/05/14/知道创宇react学习2/"/>
+  <link rel="canonical" href="http://Fatty-Fish.github.io/2018/05/22/DOM文档对象模型/"/>
 
 
 
 
 
-  <title>知道创宇react学习2 | Fatty-Fish</title>
+  <title>bfc | Fatty-Fish</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/05/14/知道创宇react学习2/">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/05/22/DOM文档对象模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qj">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">知道创宇react学习2</h1>
+          <h1 class="post-title" itemprop="name headline">bfc</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T22:11:38+08:00">
-                2018-05-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T19:45:44+08:00">
+                2018-05-22
               </time>
             
 
@@ -330,8 +330,23 @@
       
 
       
-        <p>做完专业作业，赶快来post新的学习。</p>
-<p>####</p>
+        <p>前几天看回到css，对bfc解决margin塌陷和清除浮动的背后原理还不太明白，浏览了知乎和cnblog上的解释。</p>
+<h3 id="fc"><a href="#fc" class="headerlink" title="fc"></a>fc</h3><p>先说说fc是啥。<br>fc,formating context的缩写。表示页面的一个渲染区域，有一套渲染规则，决定了内部元素怎样排列，相互作用，与外部互不影响。有bfc—-block formating context，是块级元素参与的渲染规则。ifc—–inline formating context，有行级性质的元素参与的渲染规则。</p>
+<h3 id="bfc"><a href="#bfc" class="headerlink" title="bfc"></a>bfc</h3><p>块级格式化上下文。内部渲染规则是：</p>
+<ol>
+<li>内部的block盒子会一个一个从上到下放置。</li>
+<li>盒子间垂直距离由margin决定。</li>
+<li>属于同一个bfc下的两个block盒子间垂直距离（上下margin）会重叠。</li>
+<li>每个盒子的margin的最左边与其包含块的border的最左边紧密相邻。（从左到右的格式化，从右到左相反。）也看不到float元素。</li>
+<li>bfc区域不会与float盒子重叠。</li>
+<li>bfc区域是一个独立的容器，内外部互不影响。</li>
+<li>计算高度时，float元素也包含在内。<h3 id="怎样产生bfc区域？"><a href="#怎样产生bfc区域？" class="headerlink" title="怎样产生bfc区域？"></a>怎样产生bfc区域？</h3>root元素。<br>position为absolute，fixed。<br>float不为none。<br>overflow不为visible。<br>display为inline-block，flex。<h3 id="清除浮动原理"><a href="#清除浮动原理" class="headerlink" title="清除浮动原理"></a>清除浮动原理</h3></li>
+</ol>
+<p>因为<strong><em>   bfc区域内，计算高度时，float元素也包含在内</em></strong>。所以外部包含块产生bfc后，就会把float的元素也算入高度。这其实也在忠实于<strong><em>  bfc区域是一个独立的容器，内外部互不影响。</em></strong>规则，外部包含块产生bfc后，为了不让本属于内部的float元素影响外部的元素布局，所以也将float包含进自身。</p>
+<h3 id="解决margin塌陷原理"><a href="#解决margin塌陷原理" class="headerlink" title="解决margin塌陷原理"></a>解决margin塌陷原理</h3><p>当两个block元素同属于一个bfc时，会垂直方向上margin只认其中值最大的那一个，也就是塌陷了。可以让两个元素不属于同一个bfc就解决了。同样因为<strong><em>  bfc区域是一个独立的容器，内外部互不影响。</em></strong></p>
+<h3 id="俩栏布局原理"><a href="#俩栏布局原理" class="headerlink" title="俩栏布局原理"></a>俩栏布局原理</h3><p>因为内部元素的margin的最左边与包含块的border的最左边紧密相邻，且有浮动元素也还是会遵循这个规则。所以两栏布局是：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    .left &#123;</span></span><br><span class="line"><span class="undefined">        float: left;</span></span><br><span class="line"><span class="undefined">        width:100px;</span></span><br><span class="line"><span class="undefined">        height:100px;</span></span><br><span class="line"><span class="undefined">        background-color: rgb(222,222,0);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    .right&#123;</span></span><br><span class="line"><span class="undefined">        background-color:rgb(0,222,222);</span></span><br><span class="line"><span class="undefined">        height:200px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span> = <span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span> = <span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>此时两个处在同一个bfc下的block元素，margin最左边都紧贴body的border最左边。为了让right看到left，不要和left重叠，所以可以根据<strong><em>   bfc区域不会与float 盒子重叠    </em></strong>给right生成bfc，我认为最无害的是可以用overflow：hidden。</p>
+<p>以上，来一句最近看到的好句：”if you love what you are doing, then you will success.”</p>
 
       
     </div>
@@ -356,8 +371,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/11/知道创宇笔试题半解读/" rel="next" title="知道创宇笔试题半解读-1">
-                <i class="fa fa-chevron-left"></i> 知道创宇笔试题半解读-1
+              <a href="/2018/05/15/CSS选择器/" rel="next" title="CSS选择器">
+                <i class="fa fa-chevron-left"></i> CSS选择器
               </a>
             
           </div>
@@ -365,10 +380,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/15/CSS选择器/" rel="prev" title="CSS选择器">
-                CSS选择器 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -420,8 +431,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -474,6 +494,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#fc"><span class="nav-number">1.</span> <span class="nav-text">fc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bfc"><span class="nav-number">2.</span> <span class="nav-text">bfc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎样产生bfc区域？"><span class="nav-number">3.</span> <span class="nav-text">怎样产生bfc区域？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清除浮动原理"><span class="nav-number">4.</span> <span class="nav-text">清除浮动原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决margin塌陷原理"><span class="nav-number">5.</span> <span class="nav-text">解决margin塌陷原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#俩栏布局原理"><span class="nav-number">6.</span> <span class="nav-text">俩栏布局原理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

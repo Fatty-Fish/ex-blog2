@@ -264,6 +264,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/05/22/DOM文档对象模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fatty-Fish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/DOM文档对象模型/" itemprop="url">bfc</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T19:45:44+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前几天看回到css，对bfc解决margin塌陷和清除浮动的背后原理还不太明白，浏览了知乎和cnblog上的解释。</p>
+<h3 id="fc"><a href="#fc" class="headerlink" title="fc"></a>fc</h3><p>先说说fc是啥。<br>fc,formating context的缩写。表示页面的一个渲染区域，有一套渲染规则，决定了内部元素怎样排列，相互作用，与外部互不影响。有bfc—-block formating context，是块级元素参与的渲染规则。ifc—–inline formating context，有行级性质的元素参与的渲染规则。</p>
+<h3 id="bfc"><a href="#bfc" class="headerlink" title="bfc"></a>bfc</h3><p>块级格式化上下文。内部渲染规则是：</p>
+<ol>
+<li>内部的block盒子会一个一个从上到下放置。</li>
+<li>盒子间垂直距离由margin决定。</li>
+<li>属于同一个bfc下的两个block盒子间垂直距离（上下margin）会重叠。</li>
+<li>每个盒子的margin的最左边与其包含块的border的最左边紧密相邻。（从左到右的格式化，从右到左相反。）也看不到float元素。</li>
+<li>bfc区域不会与float盒子重叠。</li>
+<li>bfc区域是一个独立的容器，内外部互不影响。</li>
+<li>计算高度时，float元素也包含在内。<h3 id="怎样产生bfc区域？"><a href="#怎样产生bfc区域？" class="headerlink" title="怎样产生bfc区域？"></a>怎样产生bfc区域？</h3>root元素。<br>position为absolute，fixed。<br>float不为none。<br>overflow不为visible。<br>display为inline-block，flex。<h3 id="清除浮动原理"><a href="#清除浮动原理" class="headerlink" title="清除浮动原理"></a>清除浮动原理</h3></li>
+</ol>
+<p>因为<strong><em>   bfc区域内，计算高度时，float元素也包含在内</em></strong>。所以外部包含块产生bfc后，就会把float的元素也算入高度。这其实也在忠实于<strong><em>  bfc区域是一个独立的容器，内外部互不影响。</em></strong>规则，外部包含块产生bfc后，为了不让本属于内部的float元素影响外部的元素布局，所以也将float包含进自身。</p>
+<h3 id="解决margin塌陷原理"><a href="#解决margin塌陷原理" class="headerlink" title="解决margin塌陷原理"></a>解决margin塌陷原理</h3><p>当两个block元素同属于一个bfc时，会垂直方向上margin只认其中值最大的那一个，也就是塌陷了。可以让两个元素不属于同一个bfc就解决了。同样因为<strong><em>  bfc区域是一个独立的容器，内外部互不影响。</em></strong></p>
+<h3 id="俩栏布局原理"><a href="#俩栏布局原理" class="headerlink" title="俩栏布局原理"></a>俩栏布局原理</h3><p>因为内部元素的margin的最左边与包含块的border的最左边紧密相邻，且有浮动元素也还是会遵循这个规则。所以两栏布局是：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    .left &#123;</span></span><br><span class="line"><span class="undefined">        float: left;</span></span><br><span class="line"><span class="undefined">        width:100px;</span></span><br><span class="line"><span class="undefined">        height:100px;</span></span><br><span class="line"><span class="undefined">        background-color: rgb(222,222,0);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    .right&#123;</span></span><br><span class="line"><span class="undefined">        background-color:rgb(0,222,222);</span></span><br><span class="line"><span class="undefined">        height:200px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span> = <span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span> = <span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>此时两个处在同一个bfc下的block元素，margin最左边都紧贴body的border最左边。为了让right看到left，不要和left重叠，所以可以根据<strong><em>   bfc区域不会与float 盒子重叠    </em></strong>给right生成bfc，我认为最无害的是可以用overflow：hidden。</p>
+<p>以上，来一句最近看到的好句：”if you love what you are doing, then you will success.”</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/05/15/CSS选择器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1471,139 +1607,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Fatty-Fish.github.io/2018/03/31/继承/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qj">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fatty-Fish">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/31/继承/" itemprop="url">继承</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T17:04:04+08:00">
-                2018-03-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Inherits"><a href="#Inherits" class="headerlink" title="Inherits"></a>Inherits</h3><p>Posted on 2018-02-04<br>在JS语法中，继承也就是想要共用一些属性，减少代码重复。实现继承只有把想要公用的属性写在原型上，再通过原型链获取。如果想要两个构造函数的实例继承一方的原型上的属性，而且两个构造函数的实例相互独立，自由发展，就需要讨论啦！最好的方法是圣杯式继承。<br>圣杯不是耶稣与他十一个门徒喝的葡萄酒杯子，也不是加勒比海盗里盛人鱼眼泪的圣杯。PS：传说喝下里面的水会返老还童，死而复生并获得永生！但是在这里借用它的意义：永生。</p>
-<p>首先先看看别的继承方式为什么不用？</p>
-<h4 id="一-传统继承"><a href="#一-传统继承" class="headerlink" title="一.传统继承"></a>一.传统继承</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">OldFish.prototype = &#123;</span><br><span class="line">    color: <span class="string">"red"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">OldFish</span></span> () &#123;</span><br><span class="line">    this.fat = 500;</span><br><span class="line">&#125;;</span><br><span class="line">var OOldFish = new OldFish();</span><br><span class="line">YoungFish.prototype = OOldFish; //让target函数的原型指向origin函数的实例。</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">YoungFish</span></span> () &#123;</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.hobbies = &#123;</span><br><span class="line">        dance: <span class="string">"well"</span>;</span><br><span class="line">        food: <span class="string">"spicy"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var OYoungFish = new YoungFish();</span><br></pre></td></tr></table></figure>
-<p>这种让target函数的原型指向origin函数的实例，来实现继承origin函数的原型上的属性方法的，是有缺陷的：YoungFish会继承老鱼的一身肥肉 this.fat = 500 啊啊,我们只想要单纯的YoungFish继承OldFish.prototype所指向的对象。</p>
-<h4 id="二-构造函数继承"><a href="#二-构造函数继承" class="headerlink" title="二.构造函数继承"></a>二.构造函数继承</h4><p>这个有点像 es6 中 class 类之间的继承：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class OldFish &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span> () &#123;</span><br><span class="line">        // var this = &#123;&#125;</span><br><span class="line">        this.fat = 500;</span><br><span class="line">        // <span class="built_in">return</span> this</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">class YoungFish extends OldFish &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span> () &#123;</span><br><span class="line">        super(); // 接收OldFish里constructor里返回的this对象。</span><br><span class="line">        this.sex = <span class="string">"female"</span>;</span><br><span class="line">        this.hobbies = &#123;</span><br><span class="line">            dance: <span class="string">"well"</span>;</span><br><span class="line">            food: <span class="string">"spicy"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通过super(), 以上YoungFish就继承了OldFish实例的所有属性方法等。<br>而原生的可以用call()方法实现：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">OldFish.prototype = &#123;</span><br><span class="line">    color: <span class="string">"red"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">OldFish</span></span> () &#123;</span><br><span class="line">    // var this = Object.create(OldFish.prototype); </span><br><span class="line">    this.fat = 500;</span><br><span class="line">    // <span class="built_in">return</span> this</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">YoungFish</span></span> () &#123;</span><br><span class="line">    OldFish.call(this);</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.hobbies = &#123;</span><br><span class="line">        dance: <span class="string">"well"</span>;</span><br><span class="line">        food: <span class="string">"spicy"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>以上通过OldFish调用call方法把YoungFish的this传进去，继承的只是实例属性，不能继承老鱼原型上的属性。不符合我们想法。而且每次new YoungFish() 都会执行OldFish.call(this)，这相当于又new OldFish(),不是我们想要的。</p>
-<h4 id="三-共享原型"><a href="#三-共享原型" class="headerlink" title="三.共享原型"></a>三.共享原型</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">OldFish.prototype = &#123;</span><br><span class="line">    color: <span class="string">"red"</span>,</span><br><span class="line">    friends: &#123;</span><br><span class="line">        shrimp: 2000,</span><br><span class="line">        octopus: 30,</span><br><span class="line">        other: 10000</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">OldFish</span></span> () &#123;</span><br><span class="line">    // var this = Object.create(OldFish.prototype); </span><br><span class="line">    this.fat = 500;</span><br><span class="line">    // <span class="built_in">return</span> this</span><br><span class="line">&#125;;</span><br><span class="line">YoungFish.prototype = OldFish.prototype; // 简单粗暴的继承！</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">YoungFish</span></span> () &#123;</span><br><span class="line">    this.sex = <span class="string">"female"</span>;</span><br><span class="line">    this.hobbies = &#123;</span><br><span class="line">        dance: <span class="string">"well"</span>;</span><br><span class="line">        food: <span class="string">"spicy"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这个共享原型的方法可以说简单粗暴，直接共同指向！如果后期操作了YoungFish的原型，那完犊子，OldFish也变了原型。影响太大不好。</p>
-<h4 id="四-圣杯式继承"><a href="#四-圣杯式继承" class="headerlink" title="四. 圣杯式继承"></a>四. 圣杯式继承</h4><p>添加一个中介者。写一个继承函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> inherit (target, origin) &#123;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">MiddleFish</span></span> () &#123;&#125;; // 造一个空的中介函数</span><br><span class="line">var oMiddleFish = new MiddleFish(); // 产生一个中介函数实例</span><br><span class="line">MiddleFish.prototype = origin.prtotype; // !! 1</span><br><span class="line">target.prototype = oMiddleFish; // !! 2</span><br><span class="line">target.prototype.constructor = target; // !! 3</span><br><span class="line">target.prototype.uber = origin; // !! 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>以上inherit函数就近乎完美。妙在制造了一个MiddleFish, 其中!! 1和2非常关键，1保证了target能够通过MiddleFish继承origin的prototype上的属性，2保证了target操作自己原型时不影响origin的原型。 因为target操作自己原型，是在MiddleFish的实例上操作，离原型差得远呢。3也很关键，如果没有纠正这一步，target找自己的constructor时，会因为自己的prototype指向“target.prototype = oMiddleFish; // !! 2”找到oMiddleFish, 又因为“MiddleFish.prototype = origin.prtotype; // !! 1”最终找到origin.prototype上的constructor是origin本身。。这不是我们想要的，3会纠正这个走向。4也是必须的，它让target知道自己的上一级是origin。<br>这只是近乎完美，我们想要达到非常完美还得改改：上面的缺陷是每次使用inherit函数，都会请求一片空间，储存一个空函数。这是非常耗费性能的。所以可以形成闭包，重复利用这个空函数。我们可以这样玩：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var inherit = (<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    var MiddleFish = <span class="function"><span class="title">function</span></span> () &#123;&#125;;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span> (target, origin) &#123;</span><br><span class="line">        MiddleFish.prototype = origin.prototype;</span><br><span class="line">        var oMiddleFish = new MiddleFish();</span><br><span class="line">        target.prototype = oMiddleFish;</span><br><span class="line">        target.prototype.constructor = target;</span><br><span class="line">        target.prototype.uber = origin;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
-<p>如此便可以复用“var MiddleFish = function () {}”这段代码，perfect</p>
-<p>最初会有这种忧虑：作用域链没有被释放，那下一次使用inherit函数时，会不会因为“MiddleFish.prototype = origin.prototype;”把上一个的原型也给改了？？答案：当然不会啦！是引用值啊。因为上一次target.prototype指向oMiddleFish，而oMiddleFish通过–proto–指向MiddleFish.prototype = origin.prototype这个引用值对象。当下一次再来使用inherit函数时，MiddleFish.prototype更改指向，这并不会影响上一次–proto–的指向。而且每个MiddleFish实例都是在MiddleFish.prototype更改指向后创立。所以每个实例自身不一样都是新鲜实例，而且每个实例–proto–所指向的对象也都是正确的origin.prototype所指向的对象。</p>
-<p>吃饭！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1654,7 +1657,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
